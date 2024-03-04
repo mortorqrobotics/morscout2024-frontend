@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SubmitButton from "../../components/submitBtn/submitBtn";
 import Header from "../../components/header/header";
 import { toast } from "react-hot-toast";
@@ -21,38 +21,47 @@ const AutoScoutForm = ({ username }) => {
   const [formState, setFormState] = useState({ ...DEFAULT_STATE });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
+  };
 
-    const isFormIncomplete = Object.values(formState).some(
-      (value) => value === "" || value === undefined
-    );
+  useEffect(() => {
+    const submitForm = async () => {
+      const isFormIncomplete = Object.values(formState).some(
+        (value) => value === "" || value === undefined
+      );
 
-    if (isFormIncomplete) {
-      toast.error("Form is not filled out completely");
-      return;
-    }
+      if (isFormIncomplete) {
+        toast.error("Form is not filled out completely");
+        setFormSubmitted(false);
+        return;
+      }
 
-    try {
-      const response = await submitAutoScout(teamNumber, {
-        ...formState,
-        username,
-      });
-      if (response.ok) {
-        toast.success("Auto Scout form submitted successfully");
-        setFormState({ ...DEFAULT_STATE });
-        navigate(`/matchscout-team-form/${teamNumber}/teleop`);
-      } else {
-        toast.error("Auto Scout form submission failed");
+      try {
+        const response = await submitAutoScout(teamNumber, {
+          ...formState,
+          username,
+        });
+        if (response.ok) {
+          toast.success("Auto Scout form submitted successfully");
+          setFormState({ ...DEFAULT_STATE });
+          navigate(`/matchscout-team-form/${teamNumber}/teleop`);
+        } else {
+          toast.error("Auto Scout form submission failed");
+        }
+      } catch (error) {
+        toast.error("Internal Server Error");
+        console.error(error);
+      } finally {
         setFormSubmitted(false);
       }
-    } catch (error) {
-      toast.error("Internal Server Error");
-      setFormSubmitted(false);
-      console.error(error);
+    };
+
+    if (formSubmitted) {
+      submitForm();
     }
-  };
+  }, [formSubmitted, formState, navigate, teamNumber, username]);
 
   return (
     <div>
@@ -86,7 +95,9 @@ const AutoScoutForm = ({ username }) => {
         <Dropdown
           label="Robot left the station?"
           options={CHOICEYESNO}
-          onSelect={(value) => setFormState({ ...formState, leftTheStation: value })}
+          onSelect={(value) =>
+            setFormState({ ...formState, leftTheStation: value })
+          }
           defaultOption={formState.leftTheStation}
         />
 

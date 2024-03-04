@@ -54,7 +54,6 @@ export const getRankings = async () => {
             },
           }
         );
-        console.log(data)
         return data.rankings.map((e) => ({
           rank: e.rank,
           team: e.team_key,
