@@ -39,21 +39,16 @@ const AutoScoutForm = ({ username }) => {
       }
 
       try {
-        const response = await submitAutoScout(teamNumber, {
+        submitAutoScout(teamNumber, {
           ...formState,
           username,
         });
-        if (response.ok) {
-          toast.success("Auto Scout form submitted successfully");
-          setFormState({ ...DEFAULT_STATE });
-          navigate(`/matchscout-team-form/${teamNumber}/teleop`);
-        } else {
-          toast.error("Auto Scout form submission failed");
-        }
+        toast.success("Auto Scout form submitted successfully");
+        setFormState({ ...DEFAULT_STATE });
+        navigate(`/matchscout-team-form/${teamNumber}/teleop`);
       } catch (error) {
-        toast.error("Internal Server Error");
+        toast.error("Auto Scout form submission failed");
         console.error(error);
-      } finally {
         setFormSubmitted(false);
       }
     };
