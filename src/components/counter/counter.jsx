@@ -1,5 +1,5 @@
 import React from "react";
-import "./Counter.css"
+import "./counter.css"
 
 const Counter = ({ label, name, value, onChange }) => {
   const handleIncrement = () => {
