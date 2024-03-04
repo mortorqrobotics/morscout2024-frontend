@@ -1,5 +1,5 @@
 import React from 'react'
-import "./DefaultBtn.css"
+import "./defaultBtn.css"
 const DefaultBtn = (props) => {
   return (
     <div >
