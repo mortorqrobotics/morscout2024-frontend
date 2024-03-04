@@ -43,25 +43,31 @@ export const getEventMatches = async () => {
         throw new Error(error)
     }
   }
-export const getRankings = async () => {
-  try {
+  export const getRankings = async () => {
+    try {
       const { data } = await axios.get(
-          `${BASE_URL}/event/${import.meta.env.VITE_EVENT_KEY}/rankings`,
-          {
-            headers: {
-              "X-TBA-Auth-Key": import.meta.env.VITE_API_KEY,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        return data.rankings.map((e) => ({
-          rank: e.rank,
-          team: e.team_key,
-        }));
-  } catch (error) {
-      throw new Error(error)
-  }
-}
+        `${BASE_URL}/event/${import.meta.env.VITE_EVENT_KEY}/rankings`,
+        {
+          headers: {
+            "X-TBA-Auth-Key": import.meta.env.VITE_API_KEY,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      // Extract rankings data
+      const rankings = data.rankings.map((e) => ({
+        rank: e.rank,
+        teamKey: e.team_key,
+        teamNumber: e.team_key.substring(3), // Extract team number from team key
+        team: getTeamName(e.team_key),
+      }));
+  
+      return rankings;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
 export const getTeamName = async (teamKey) => {
   try {
@@ -71,7 +77,7 @@ export const getTeamName = async (teamKey) => {
         "Content-Type": "application/json",
       }
     });
-    return data.name; 
+    return data.nickname; 
   } catch (error) {
     throw new Error(error.response.data.Error); // Throw an error with the error message if request fails
   }
