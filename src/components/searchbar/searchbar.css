@@ -1,0 +1,15 @@
+.search-bar{
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 20px;
+    width: 100%;
+    padding: 20px;
+    color: white;
+    font-size: 18px;
+}
+@media screen and (max-width: 360px) {
+    .search-bar{
+        width: 80%  ;
+    }
+  }
