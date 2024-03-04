@@ -136,7 +136,7 @@ const PitScoutForm = ({username}) => {
         />
 
         <TextInput
-          label="Frame Size"
+          label="Frame Size(in)"
           name="frameSize"
           value={formState.frameSize}
           onChange={handleChange}
