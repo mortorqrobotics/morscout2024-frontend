@@ -18,7 +18,6 @@ const Header = (props) => {
 };
 Header.propTypes = {
   toWhere: PropTypes.string,
-  headerText: PropTypes.object,
 };
 
 export default Header;

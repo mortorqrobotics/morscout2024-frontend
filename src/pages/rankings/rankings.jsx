@@ -39,9 +39,8 @@ const Rankings = () => {
 
   return (
     <div>
-      <Header toWhere="/" headerText="Rankings" />
+      <Header toWhere="/" headerText={ "Rankings" } />
       <SearchBar onSearch={handleSearch} searchText="Search by team or rank" />
-      {/* Conditional rendering for loading animation */}
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
