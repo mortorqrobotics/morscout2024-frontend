@@ -20,7 +20,7 @@ const MainPage = ({ username }) => {
           <DefaultBtn backgroundColor="#FF5F00" text="User" />
         </Link>
         {username === import.meta.env.VITE_ADMIN1 ||
-        username === import.meta.env.VITE_ADMIN2 ? (
+        username === import.meta.env.VITE_ADMIN2 || username === import.meta.env.VITE_ADMIN3 ? (
           <Link to="/admin">
             <DefaultBtn backgroundColor="#FF5F00" text="Admin Page" />
           </Link>
