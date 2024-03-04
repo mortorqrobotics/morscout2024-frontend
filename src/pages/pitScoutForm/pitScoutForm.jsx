@@ -11,7 +11,7 @@ import "./pitScoutForm.css";
 
 const DRIVETRAINS = ["Swerve Drive", "Westcoast/Tank drive", "Omni", "Mecanum"];
 const CHOICEYESNO = ["Yes", "No"];
-const SCORINGPOSITIONS = ["Amp", "Speaker"];
+const SCORINGPOSITIONS = ["Amp", "Speaker", "Both"];
 const DEFAULT_STATE = {
   robotWeight: "",
   drivetrain: "Swerve Drive",
@@ -22,8 +22,9 @@ const DEFAULT_STATE = {
   auto: "Yes",
   frameSize: "",
   scoringPosition: "Amp",
-  scoringAmp: "Yes", // Default value for scoring Amp
-  scoringSpeaker: "Yes", // Default value for scoring Speaker
+  scoringPositionAuto: "Amp",
+
+   // Default value for scoring Speaker
   autoNotesScored: "", // New field for the number of notes scored in auto
 };
 
@@ -144,25 +145,18 @@ const PitScoutForm = ({ username }) => {
         />
 
         <Dropdown
-          label="Scoring Position :"
+          label="Scoring Position In Auto:"
+          options={SCORINGPOSITIONS}
+          onSelect={(value) => handleDropdownSelect(value, "scoringPosition")}
+          defaultOption={formState.scoringPositionAuto}
+        />
+        <Dropdown
+          label="Scoring Position In General:"
           options={SCORINGPOSITIONS}
           onSelect={(value) => handleDropdownSelect(value, "scoringPosition")}
           defaultOption={formState.scoringPosition}
         />
 
-        <Dropdown
-          label="Score Amp in Auto :"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "scoringAmp")}
-          defaultOption={formState.scoringAmp}
-        />
-
-        <Dropdown
-          label="Score Speaker in Auto :"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "scoringSpeaker")}
-          defaultOption={formState.scoringSpeaker}
-        />
 
         <NumberInput
           label="Number of Notes Scored in Auto "
