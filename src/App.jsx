@@ -8,6 +8,7 @@ import PitScoutForm from "./pages/pitScoutForm/pitScoutForm";
 import AutoScoutForm from "./pages/autoScoutForm/autoScoutForm";
 import TeleopScoutForm from "./pages/teleopScoutForm/teleopScoutForm";
 import LoginPage from "./pages/loginPage/loginPage";
+import UserPage from "./pages/userPage/userPage";
 
 import { useEffect, useState } from "react";
 import Rankings from "./pages/rankings/rankings";
@@ -48,7 +49,7 @@ function App() {
         path="/matchscout-team-form/:teamNumber/teleop"
         element={<TeleopScoutForm username={username} />}
       />
-
+      <Route path="/userpage" element={<UserPage />} />
       <Route path="/pit-team-choice" element={<Pitscoutpage />} />
       <Route
         path="/pit-team-form/:teamNumber"

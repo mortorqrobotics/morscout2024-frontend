@@ -16,6 +16,9 @@ const MainPage = ({ username }) => {
         <Link to="/rankings">
           <DefaultBtn backgroundColor="#FF5F00" text="Rankings" />
         </Link>
+        <Link to="/userpage">
+          <DefaultBtn backgroundColor="#FF5F00" text="User" />
+        </Link>
         {username === import.meta.env.VITE_ADMIN1 ||
         username === import.meta.env.VITE_ADMIN2 ? (
           <Link to="/admin">
