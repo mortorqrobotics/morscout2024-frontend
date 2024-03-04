@@ -41,7 +41,7 @@ export const submitAutoScout = async (teamNumber, data) => {
 
 export const getScoutData = async (scoutType) => {
   try {
-    const response = await fetch(`${BACKEND_URL}/get-${scoutType}-data`);
+    const response = await fetch(`${BACKEND_URL}/${scoutType}`);
     return response;
   } catch (error) {
     console.error("Error fetching scout data:", error);
