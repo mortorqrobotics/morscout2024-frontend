@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./matchscoutPage.css";
+import "./matchScoutPage.css";
 import Header from "../../components/header/header";
 import MatchButton from "../../components/matchButton/matchButton";
 import { getEventMatches } from "../../api/tba";
