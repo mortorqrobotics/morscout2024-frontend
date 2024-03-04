@@ -4,9 +4,10 @@
     flex-direction: column;
     justify-content: center;
     margin: 20px;
+    align-items: flex-start;
 }
 .list-item{
-    font-size: 22px;
+    font-size: 18px;
     padding: 5px;
     font-weight: 600;
 }
