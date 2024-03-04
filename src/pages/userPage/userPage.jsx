@@ -8,7 +8,7 @@ const UserPage = () => {
       <Header toWhere="/" headerText="User" />
 
       <div className="admin-btns">
-        <Link to="/">
+        <Link to="/login">
           <button className="admin-btn">Change Username</button>
         </Link>
         <a href="https://forms.gle/RuT55h2veopbMNq46">
