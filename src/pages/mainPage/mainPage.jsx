@@ -26,6 +26,12 @@ const MainPage = ({ username }) => {
           </Link>
         ) : null}
       </div>
+      <br />
+
+      <h5>
+        User :{username}
+      </h5>
+      <br />
     </div>
   );
 };
