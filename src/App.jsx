@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import AdminPage from "./pages/adminPage/adminPage";
 import Pitscoutpage from "./pages/pitScoutTeamSelectPage/pitScoutTeamSelectPage";
-import MatchscoutPage from "./pages/matchscoutPage/matchscoutPage";
+import MatchscoutPage from "./pages/matchScoutPage/matchscoutPage";
 import PitScoutForm from "./pages/pitScoutForm/pitScoutForm";
 import AutoScoutForm from "./pages/autoScoutForm/autoScoutForm";
 import TeleopScoutForm from "./pages/teleopScoutForm/teleopScoutForm";
