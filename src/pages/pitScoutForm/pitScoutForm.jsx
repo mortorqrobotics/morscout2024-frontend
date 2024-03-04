@@ -7,12 +7,12 @@ import Dropdown from "../../components/dropdown/dropdown";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
-import "./pitScoutForm.css"
+import "./pitScoutForm.css";
 
-const DRIVETRAINS = ["Swerve Drive", "Westcoast/Tank drive", "Omni", "Mecanum"]
-const CHOICEYESNO = ["Yes", "No"]
-const SCORINGPOSITIONS = ["Amp", "Speaker"]
-const DEFAULT_STATE =  {
+const DRIVETRAINS = ["Swerve Drive", "Westcoast/Tank drive", "Omni", "Mecanum"];
+const CHOICEYESNO = ["Yes", "No"];
+const SCORINGPOSITIONS = ["Amp", "Speaker"];
+const DEFAULT_STATE = {
   robotWeight: "",
   drivetrain: "Swerve Drive",
   estimatedCycleTime: "",
@@ -21,15 +21,17 @@ const DEFAULT_STATE =  {
   trap: "Yes",
   auto: "Yes",
   frameSize: "",
-  scoringPosition: "Amp"
-}
-const PitScoutForm = ({username}) => {
+  scoringPosition: "Amp",
+  scoringAmp: "Yes", // Default value for scoring Amp
+  scoringSpeaker: "Yes", // Default value for scoring Speaker
+  autoNotesScored: "", // New field for the number of notes scored in auto
+};
+
+const PitScoutForm = ({ username }) => {
   const { teamNumber } = useParams();
   const navigate = useNavigate();
 
-
-  const [formState, setFormState] = useState({...DEFAULT_STATE, teamNumber});
-
+  const [formState, setFormState] = useState({ ...DEFAULT_STATE, teamNumber });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -57,10 +59,10 @@ const PitScoutForm = ({username}) => {
     }
 
     try {
-      const response = await submitPitscout(teamNumber, {...formState,  username});
+      const response = await submitPitscout(teamNumber, { ...formState, username });
       if (response.ok) {
         toast.success("Pit form submitted successfully");
-        setFormState({...DEFAULT_STATE, teamNumber});
+        setFormState({ ...DEFAULT_STATE, teamNumber });
         navigate("/");
       } else {
         toast.error("Pit form submission failed");
@@ -69,8 +71,7 @@ const PitScoutForm = ({username}) => {
     } catch (error) {
       toast.error("Internal Server Error");
       setFormSubmitted(false);
-      console.log(error)
-
+      console.log(error);
     }
   };
 
@@ -142,11 +143,32 @@ const PitScoutForm = ({username}) => {
           onChange={handleChange}
         />
 
-          <Dropdown
+        <Dropdown
           label="Scoring Position :"
           options={SCORINGPOSITIONS}
           onSelect={(value) => handleDropdownSelect(value, "scoringPosition")}
           defaultOption={formState.scoringPosition}
+        />
+
+        <Dropdown
+          label="Score Amp in Auto :"
+          options={CHOICEYESNO}
+          onSelect={(value) => handleDropdownSelect(value, "scoringAmp")}
+          defaultOption={formState.scoringAmp}
+        />
+
+        <Dropdown
+          label="Score Speaker in Auto :"
+          options={CHOICEYESNO}
+          onSelect={(value) => handleDropdownSelect(value, "scoringSpeaker")}
+          defaultOption={formState.scoringSpeaker}
+        />
+
+        <NumberInput
+          label="Number of Notes Scored in Auto "
+          name="autoNotesScored"
+          value={formState.autoNotesScored}
+          onChange={handleChange}
         />
 
         <SubmitButton label={formSubmitted ? "Submitting..." : "Submit"} />
