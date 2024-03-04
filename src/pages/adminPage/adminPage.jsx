@@ -11,8 +11,8 @@ const AdminPage = () => {
       const response = await getScoutData(scoutType);
       if (response.ok) {
         const data = await response.json();
-        // Generate spreadsheet
-        generateSpreadsheet(data, scoutType);
+        // Generate spreadsheet and initiate download
+        generateSpreadsheetAndDownload(data, scoutType);
         console.log(`${scoutType} data fetched successfully`);
       } else {
         console.error(`${scoutType} data fetch failed`);
@@ -23,11 +23,23 @@ const AdminPage = () => {
     }
   };
 
-  const generateSpreadsheet = (data, scoutType) => {
+  const generateSpreadsheetAndDownload = (data, scoutType) => {
     const workbook = utils.book_new();
     const worksheet = utils.json_to_sheet(data);
     utils.book_append_sheet(workbook, worksheet, `${scoutType} Data`);
-    writeFile(workbook, `${scoutType}Data.xlsx`);
+    writeFile(workbook, `${scoutType}Data.xlsx`, { type: "blob" }).then((blob) => {
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${scoutType}Data.xlsx`;
+      // Trigger download
+      document.body.appendChild(a);
+      a.click();
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    });
   };
 
   return (
