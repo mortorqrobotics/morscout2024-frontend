@@ -1,0 +1,5 @@
+.teleopScout{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}

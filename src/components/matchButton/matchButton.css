@@ -1,0 +1,50 @@
+.line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blueButton {
+  width: 110px;
+  height: 60px;
+  text-align: center;
+  background-color: #23b0ff;
+  color: white;
+  margin: 10px 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  /* 40 */
+}
+
+.redButton {
+  width: 110px;
+  height: 60px;
+  text-align: center;
+  background-color: #e42323;
+  color: white;
+  margin: 10px 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  /* 40 */
+}
+
+.match-heading {
+  display: flex;
+}
+@media screen and (max-width: 360px) {
+  .match-heading {
+    font-size: 18px;
+    }
+    .match-heading{
+        display: block;
+    }
+}
+@media screen and (max-width: 320px) {
+      .match-heading{
+          display: block;
+      }
+      .redButton , .blueButton{
+        width: 90px;
+        font-size: 18px
+      }
+  }

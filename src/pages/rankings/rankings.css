@@ -1,0 +1,12 @@
+.ranking-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
+.list-item{
+    font-size: 22px;
+    padding: 5px;
+    font-weight: 600;
+}

@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@700&display=swap');
+
+nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 60px;
+    margin-bottom: 30px;
+    top: 10px;
+    justify-content: flex-start;
+}
+
+
+@media screen and (max-width: 360px) {
+    .header-text{
+        font-size: 40px;
+    }
+  }
+
+nav h2 {
+    font-weight: bold;
+    font-size: 40pt;
+    width: 100%;
+    text-align: center;
+}
+nav div {
+    flex-grow: 1;
+    text-align: center;
+}
+.backIcon{
+    margin-top: 9px;
+    padding: 0 !important;
+    background-color: #0c0c0c;
+    width: 2em !important;
+    height: 2em !important;
+}
+
+
