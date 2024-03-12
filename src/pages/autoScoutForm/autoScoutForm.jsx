@@ -7,11 +7,11 @@ import { submitAutoScout } from "../../api/server"; // Assuming you have a funct
 import Counter from "../../components/counter/counter";
 import Dropdown from "../../components/dropdown/dropdown";
 
-const CHOICEYESNO = ["Yes", "No"];
+const CHOICEYESNOBLANK = ["", "Yes", "No"]; // Added blank for default
 const DEFAULT_STATE = {
-  speakerCounter: 0,
-  ampCounter: 0,
-  leftTheStation: "Yes"
+  notesScoredInSpeaker: 0,
+  notesScoredInAmp: 0,
+  leftRobotStartingZone: "",
 };
 
 const AutoScoutForm = ({ username }) => {
@@ -70,30 +70,30 @@ const AutoScoutForm = ({ username }) => {
       />
       <form onSubmit={handleSubmit} className="autoScout">
         <Counter
-          label="Speaker Counter"
-          name="speakerCounter"
-          value={formState.speakerCounter}
+          label="Notes Scored in Speaker"
+          name="notesScoredInSpeaker"
+          value={formState.notesScoredInSpeaker}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
         />
 
         <Counter
-          label="Amp Counter"
-          name="ampCounter"
-          value={formState.ampCounter}
+          label="Notes Scored in Amp"
+          name="notesScoredInAmp"
+          value={formState.notesScoredInAmp}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
         />
 
         <Dropdown
-          label="Robot left the station?"
-          options={CHOICEYESNO}
+          label="Robot left Robot Starting Zone?"
+          options={CHOICEYESNOBLANK}
           onSelect={(value) =>
-            setFormState({ ...formState, leftTheStation: value })
+            setFormState({ ...formState, leftRobotStartingZone: value })
           }
-          defaultOption={formState.leftTheStation}
+          defaultOption={formState.leftRobotStartingZone}
         />
 
         <SubmitButton label={formSubmitted ? "Submitting..." : "Submit"} />
