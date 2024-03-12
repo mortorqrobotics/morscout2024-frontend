@@ -1,6 +1,5 @@
 import { useState } from "react";
 import TextInput from "../../components/textInput/textInput";
-import NumberInput from "../../components/numberInput/numberInput";
 import SubmitButton from "../../components/submitBtn/submitBtn";
 import Header from "../../components/header/header";
 import Dropdown from "../../components/dropdown/dropdown";
@@ -8,24 +7,25 @@ import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
+import "../teleopScoutForm/ts.css"
 
-const DRIVETRAINS = ["Swerve Drive", "Westcoast/Tank drive", "Omni", "Mecanum"];
-const CHOICEYESNO = ["Yes", "No"];
-const SCORINGPOSITIONS = ["Amp", "Speaker", "Both"];
+const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
+const SCORINGPOSITIONS = ["-", "Amp", "Speaker", "Both"]; // Blank added for default
+
 const DEFAULT_STATE = {
   robotWeight: "",
-  drivetrain: "Swerve Drive",
-  estimatedCycleTime: "",
-  pickupFromFloor: "Yes",
-  climb: "Yes",
-  trap: "Yes",
-  auto: "Yes",
   frameSize: "",
-  scoringPosition: "Amp",
-  scoringPositionAuto: "Amp",
-
-   // Default value for scoring Speaker
-  autoNotesScored: "", // New field for the number of notes scored in auto
+  drivetrain: "",
+  auto: "",
+  scoringPositionAuto: "",
+  autoNotesScored: "",
+  scoringPosition: "",
+  estimatedCycleTime: "",
+  pickupFromFloor: "",
+  climb: "",
+  trap: "",
+  buddyClimb: "", // New field added for buddy climb
+  climbTime: "", // New field added for climb time
 };
 
 const PitScoutForm = ({ username }) => {
@@ -51,7 +51,7 @@ const PitScoutForm = ({ username }) => {
     e.preventDefault();
     setFormSubmitted(true);
     const isFormIncomplete = Object.values(formState).some(
-      (value) => value === "" || value === undefined
+      (value) => value === ""
     );
 
     if (isFormIncomplete) {
@@ -60,7 +60,10 @@ const PitScoutForm = ({ username }) => {
     }
 
     try {
-      const response = await submitPitscout(teamNumber, { ...formState, username });
+      const response = await submitPitscout(teamNumber, {
+        ...formState,
+        username,
+      });
       if (response.ok) {
         toast.success("Pit form submitted successfully");
         setFormState({ ...DEFAULT_STATE, teamNumber });
@@ -77,7 +80,7 @@ const PitScoutForm = ({ username }) => {
   };
 
   return (
-    <div>
+    <div className="pit">
       <Header
         toWhere={"/pit-team-choice"}
         headerText={
@@ -88,81 +91,95 @@ const PitScoutForm = ({ username }) => {
         }
       />
       <form onSubmit={handleSubmit} className="pit-form">
-        <NumberInput
+        <TextInput
           label="Robot Weight (lbs)"
           name="robotWeight"
           value={formState.robotWeight}
           onChange={handleChange}
         />
 
-        <Dropdown
-          label="Drivetrain :"
-          options={DRIVETRAINS}
-          onSelect={(value) => handleDropdownSelect(value, "drivetrain")}
-          defaultOption={formState.drivetrain}
-        />
-
-        <NumberInput
-          label="Estimated Cycle Time (s)"
-          name="estimatedCycleTime"
-          value={formState.estimatedCycleTime}
-          onChange={handleChange}
-        />
-
-        <Dropdown
-          label="Pickup from the floor :"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "pickupFromFloor")}
-          defaultOption={formState.pickupFromFloor}
-        />
-
-        <Dropdown
-          label="Climb :"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "climb")}
-          defaultOption={formState.climb}
-        />
-
-        <Dropdown
-          label="Trap :"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "trap")}
-          defaultOption={formState.trap}
-        />
-
-        <Dropdown
-          label="Auto :"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "auto")}
-          defaultOption={formState.auto}
-        />
-
         <TextInput
-          label="Frame Size(in)"
+          label="Frame Size (length x width in inches)"
           name="frameSize"
           value={formState.frameSize}
           onChange={handleChange}
         />
 
         <Dropdown
-          label="Scoring Position In Auto:"
+          label="Drivetrain"
+          options={["-", "Swerve Drive", "Westcoast/Tank drive", "Omni", "Mecanum"]}
+          onSelect={(value) => handleDropdownSelect(value, "drivetrain")}
+          defaultOption={formState.drivetrain}
+        />
+
+        <Dropdown
+          label="Can do auto?"
+          options={CHOICEYESNO}
+          onSelect={(value) => handleDropdownSelect(value, "auto")}
+          defaultOption={formState.auto}
+        />
+
+        <Dropdown
+          label="Scoring position in auto?"
           options={SCORINGPOSITIONS}
-          onSelect={(value) => handleDropdownSelect(value, "scoringPosition")}
+          onSelect={(value) => handleDropdownSelect(value, "scoringPositionAuto")}
           defaultOption={formState.scoringPositionAuto}
         />
+
+        <TextInput
+          label="Possible auto sequences (how many can they score - list all please!)"
+          name="autoNotesScored"
+          value={formState.autoNotesScored}
+          onChange={handleChange}
+        />
+
         <Dropdown
-          label="Scoring Position In General:"
+          label="Scoring position in teleop?"
           options={SCORINGPOSITIONS}
           onSelect={(value) => handleDropdownSelect(value, "scoringPosition")}
           defaultOption={formState.scoringPosition}
         />
 
-
-        <NumberInput
-          label="Number of Notes Scored in Auto "
-          name="autoNotesScored"
-          value={formState.autoNotesScored}
+        <TextInput
+          label="Estimated Cycle Time (human player station to shooting)? (s)"
+          name="estimatedCycleTime"
+          value={formState.estimatedCycleTime}
           onChange={handleChange}
+        />
+
+        <Dropdown
+          label="Where can note be picked up?"
+          options={CHOICEYESNO}
+          onSelect={(value) => handleDropdownSelect(value, "pickupFromFloor")}
+          defaultOption={formState.pickupFromFloor}
+        />
+
+        <Dropdown
+          label="Can climb?"
+          options={CHOICEYESNO}
+          onSelect={(value) => handleDropdownSelect(value, "climb")}
+          defaultOption={formState.climb}
+        />
+
+        <TextInput
+          label="Climb Time (s)"
+          name="climbTime"
+          value={formState.climbTime}
+          onChange={handleChange}
+        />
+
+        <Dropdown
+          label="Can buddy climb?"
+          options={CHOICEYESNO}
+          onSelect={(value) => handleDropdownSelect(value, "buddyClimb")}
+          defaultOption={formState.buddyClimb}
+        />
+
+        <Dropdown
+          label="Can do trap?"
+          options={CHOICEYESNO}
+          onSelect={(value) => handleDropdownSelect(value, "trap")}
+          defaultOption={formState.trap}
         />
 
         <SubmitButton label={formSubmitted ? "Submitting..." : "Submit"} />

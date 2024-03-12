@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "../../components/header/header";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
@@ -9,17 +9,18 @@ import TextInput from "../../components/textInput/textInput";
 import SubmitButton from "../../components/submitBtn/submitBtn";
 import "./ts.css";
 
-const CHOICEYESNO = ["Yes", "No"];
+const CHOICEYESNOBLANK = ["-", "Yes", "No"]; // Added blank for default
 const DEFAULT_STATE = {
-  speakerCounter: 0,
-  ampCounter: 0,
-  trap: "Yes",
-  guyThrewTheRing: "Yes",
+  notesScoredInSpeaker: 0,
+  notesScoredInAmp: 0,
+  trap: "", // Updated state key
+  guyThrewTheRing: "", // Updated state key
   generalComments: "",
-  robotSpeed: "Slow",
-  didTheyDoDefense: "No",
-  climbRating: "No Climb",
-  climbComments: ""
+  robotSpeed: "-",
+  didTheyDoDefense: "-",
+  climbRating: "-",
+  climbComments: "",
+  didRobotClimbWithAnother: "", // New state key
 };
 
 const TeleopScoutForm = ({ username }) => {
@@ -90,32 +91,33 @@ const TeleopScoutForm = ({ username }) => {
       />
       <form onSubmit={handleSubmit} className="teleopScout">
         <Counter
-          label="Speaker Counter"
-          name="speakerCounter"
-          value={formState.speakerCounter}
+          label="Notes Scored in Speaker"
+          name="notesScoredInSpeaker"
+          value={formState.notesScoredInSpeaker}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
         />
 
         <Counter
-          label="Amp Counter"
-          name="ampCounter"
-          value={formState.ampCounter}
+          label="Notes Scored in Amp"
+          name="notesScoredInAmp"
+          value={formState.notesScoredInAmp}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
         />
 
         <Dropdown
-          label="Trap?"
-          options={CHOICEYESNO}
+          label="Scored in Trap?"
+          options={CHOICEYESNOBLANK}
           onSelect={(value) => setFormState({ ...formState, trap: value })}
           defaultOption={formState.trap}
         />
+
         <Dropdown
-          label="Human Player Attempted To Shoot :"
-          options={CHOICEYESNO}
+          label="Human Player Scored Microphone?"
+          options={CHOICEYESNOBLANK}
           onSelect={(value) =>
             setFormState({ ...formState, guyThrewTheRing: value })
           }
@@ -123,16 +125,26 @@ const TeleopScoutForm = ({ username }) => {
         />
 
         <Dropdown
+          label="Did the robot climb with another robot?" // New label
+          options={CHOICEYESNOBLANK} // Updated options
+          onSelect={(value) =>
+            setFormState({ ...formState, didRobotClimbWithAnother: value }) // New state key
+          }
+          defaultOption={formState.didRobotClimbWithAnother} // Updated default option
+        />
+
+        <Dropdown
           label="Robot Speed"
-          options={["Slow", "Medium", "Fast"]}
+          options={["-","Slow", "Medium", "Fast"]}
           onSelect={(value) =>
             setFormState({ ...formState, robotSpeed: value })
           }
           defaultOption={formState.robotSpeed}
         />
+
         <Dropdown
           label="Climb Rating"
-          options={["No Climb", "1", "2", "3", "4", "5"]}
+          options={["-","No Climb", "1", "2", "3", "4", "5"]}
           onSelect={handleClimbRatingChange}
           defaultOption={formState.climbRating}
         />
@@ -148,8 +160,8 @@ const TeleopScoutForm = ({ username }) => {
         )}
 
         <Dropdown
-          label="Did they do defense?"
-          options={CHOICEYESNO}
+          label="Did they play defense?"
+          options={CHOICEYESNOBLANK}
           onSelect={(value) =>
             setFormState({ ...formState, didTheyDoDefense: value })
           }
@@ -157,7 +169,7 @@ const TeleopScoutForm = ({ username }) => {
         />
         {/* Make General Comments field optional */}
         <TextInput
-          label="General Comments"
+          label="Comments"
           name="generalComments"
           value={formState.generalComments}
           onChange={(e) =>
