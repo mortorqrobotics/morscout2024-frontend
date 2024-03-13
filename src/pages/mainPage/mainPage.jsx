@@ -2,7 +2,13 @@ import DefaultBtn from "../../components/defaultBtn/defaultBtn";
 import logo from "../../assets/logo.png";
 import "./mainPage.css";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+
 const MainPage = ({ username }) => {
+  useEffect(() => {
+    document.querySelector(".main-page").style.opacity = "1"; // Set opacity to 1 after component mount
+  }, []);
+
   return (
     <div className="main-page">
       <img src={logo} alt="logo" className="logo" />
@@ -20,17 +26,15 @@ const MainPage = ({ username }) => {
           <DefaultBtn backgroundColor="#FF5F00" text="User" />
         </Link>
         {username === import.meta.env.VITE_ADMIN1 ||
-        username === import.meta.env.VITE_ADMIN2 || username === import.meta.env.VITE_ADMIN3 ? (
+        username === import.meta.env.VITE_ADMIN2 ||
+        username === import.meta.env.VITE_ADMIN3 ? (
           <Link to="/admin">
             <DefaultBtn backgroundColor="#FF5F00" text="Admin Page" />
           </Link>
         ) : null}
       </div>
       <br />
-
-      <h5>
-        User :{username}
-      </h5>
+      <h5>User: {username}</h5>
       <br />
     </div>
   );
