@@ -147,11 +147,11 @@ const PitScoutForm = ({ username }) => {
           onChange={handleChange}
         />
 
-        <Dropdown
+        <TextInput
           label="Where can note be picked up?"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "pickupFromFloor")}
-          defaultOption={formState.pickupFromFloor}
+          name="pickupFromFloor"
+          value={formState.pickupFromFloor}
+          onChange={handleChange}
         />
 
         <Dropdown
