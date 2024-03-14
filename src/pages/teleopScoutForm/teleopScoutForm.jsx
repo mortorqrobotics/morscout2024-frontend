@@ -21,6 +21,8 @@ const DEFAULT_STATE = {
   climbRating: "-",
   climbComments: "",
   didRobotClimbWithAnother: "", // New state key
+  attemptedShotsInSpeaker: 0,
+  attemptedShotsInAmp: 0, // New state key for counting attempted shots
 };
 
 const TeleopScoutForm = ({ username }) => {
@@ -98,11 +100,27 @@ const TeleopScoutForm = ({ username }) => {
             setFormState({ ...formState, [name]: value })
           }
         />
+        <Counter
+          label="Notes Attempted in Speaker"
+          name="attemptedShotsInSpeaker"
+          value={formState.attemptedShotsInSpeaker}
+          onChange={(name, value) =>
+            setFormState({ ...formState, [name]: value })
+          }
+        />
 
         <Counter
           label="Notes Scored in Amp"
           name="notesScoredInAmp"
           value={formState.notesScoredInAmp}
+          onChange={(name, value) =>
+            setFormState({ ...formState, [name]: value })
+          }
+        />
+        <Counter
+          label="Notes Attempted in Amp"
+          name="attemptedShotsInAmp"
+          value={formState.attemptedShotsInAmp}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
@@ -127,15 +145,16 @@ const TeleopScoutForm = ({ username }) => {
         <Dropdown
           label="Did the robot climb with another robot?" // New label
           options={CHOICEYESNOBLANK} // Updated options
-          onSelect={(value) =>
-            setFormState({ ...formState, didRobotClimbWithAnother: value }) // New state key
+          onSelect={
+            (value) =>
+              setFormState({ ...formState, didRobotClimbWithAnother: value }) // New state key
           }
           defaultOption={formState.didRobotClimbWithAnother} // Updated default option
         />
 
         <Dropdown
           label="Robot Speed"
-          options={["-","Slow", "Medium", "Fast"]}
+          options={["-", "Slow", "Medium", "Fast"]}
           onSelect={(value) =>
             setFormState({ ...formState, robotSpeed: value })
           }
@@ -144,7 +163,7 @@ const TeleopScoutForm = ({ username }) => {
 
         <Dropdown
           label="Climb Rating"
-          options={["-","No Climb", "1", "2", "3", "4", "5"]}
+          options={["-", "No Climb", "1", "2", "3", "4", "5"]}
           onSelect={handleClimbRatingChange}
           defaultOption={formState.climbRating}
         />

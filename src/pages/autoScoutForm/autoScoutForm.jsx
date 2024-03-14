@@ -12,6 +12,8 @@ const DEFAULT_STATE = {
   notesScoredInSpeaker: 0,
   notesScoredInAmp: 0,
   leftRobotStartingZone: "",
+  attemptedShotsInSpeaker: 0,
+  attemptedShotsInAmp: 0,
 };
 
 const AutoScoutForm = ({ username }) => {
@@ -77,11 +79,26 @@ const AutoScoutForm = ({ username }) => {
             setFormState({ ...formState, [name]: value })
           }
         />
-
+        <Counter
+          label="Notes Attempted in Speaker"
+          name="attemptedShotsInSpeaker"
+          value={formState.attemptedShotsInSpeaker}
+          onChange={(name, value) =>
+            setFormState({ ...formState, [name]: value })
+          }
+        />
         <Counter
           label="Notes Scored in Amp"
           name="notesScoredInAmp"
           value={formState.notesScoredInAmp}
+          onChange={(name, value) =>
+            setFormState({ ...formState, [name]: value })
+          }
+        />
+        <Counter
+          label="Notes Attempted in Amp"
+          name="attemptedShotsInAmp"
+          value={formState.attemptedShotsInAmp}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
