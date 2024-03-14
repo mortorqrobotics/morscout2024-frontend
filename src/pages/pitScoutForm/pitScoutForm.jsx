@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
-import "../teleopScoutForm/ts.css"
+import "../teleopScoutForm/ts.css";
 
 const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
 const SCORINGPOSITIONS = ["-", "Amp", "Speaker", "Both"]; // Blank added for default
@@ -26,6 +26,7 @@ const DEFAULT_STATE = {
   trap: "",
   buddyClimb: "", // New field added for buddy climb
   climbTime: "", // New field added for climb time
+  shootFrom: "", // New field added for where the robot can shoot from
 };
 
 const PitScoutForm = ({ username }) => {
@@ -107,7 +108,13 @@ const PitScoutForm = ({ username }) => {
 
         <Dropdown
           label="Drivetrain"
-          options={["-", "Swerve Drive", "Westcoast/Tank drive", "Omni", "Mecanum"]}
+          options={[
+            "-",
+            "Swerve Drive",
+            "Westcoast/Tank drive",
+            "Omni",
+            "Mecanum",
+          ]}
           onSelect={(value) => handleDropdownSelect(value, "drivetrain")}
           defaultOption={formState.drivetrain}
         />
@@ -122,7 +129,9 @@ const PitScoutForm = ({ username }) => {
         <Dropdown
           label="Scoring position in auto?"
           options={SCORINGPOSITIONS}
-          onSelect={(value) => handleDropdownSelect(value, "scoringPositionAuto")}
+          onSelect={(value) =>
+            handleDropdownSelect(value, "scoringPositionAuto")
+          }
           defaultOption={formState.scoringPositionAuto}
         />
 
@@ -182,6 +191,12 @@ const PitScoutForm = ({ username }) => {
           defaultOption={formState.trap}
         />
 
+        <TextInput
+          label="Where can the robot shoot from?"
+          name="shootFrom"
+          value={formState.shootFrom}
+          onChange={handleChange}
+        />
         <SubmitButton label={formSubmitted ? "Submitting..." : "Submit"} />
       </form>
     </div>
