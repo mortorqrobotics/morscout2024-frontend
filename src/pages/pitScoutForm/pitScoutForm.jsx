@@ -27,6 +27,7 @@ const DEFAULT_STATE = {
   buddyClimb: "", // New field added for buddy climb
   climbTime: "", // New field added for climb time
   shootFrom: "", // New field added for where the robot can shoot from
+  additionalComments: "", // New field added for additional comments
 };
 
 const PitScoutForm = ({ username }) => {
@@ -51,9 +52,11 @@ const PitScoutForm = ({ username }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitted(true);
-    const isFormIncomplete = Object.values(formState).some(
-      (value) => value === ""
-    );
+    
+    // Exclude additionalComments field if it's empty
+    const isFormIncomplete = Object.entries(formState)
+      .filter(([key, value]) => key !== "additionalComments" || value !== "")
+      .some(([key, value]) => value === "");
 
     if (isFormIncomplete) {
       toast.error("Form is not filled out completely");
@@ -196,6 +199,14 @@ const PitScoutForm = ({ username }) => {
           name="shootFrom"
           value={formState.shootFrom}
           onChange={handleChange}
+        />
+
+        <TextInput
+          label="Additional Comments"
+          name="additionalComments"
+          value={formState.additionalComments}
+          onChange={handleChange}
+          optional={true} // Optional field
         />
         <SubmitButton label={formSubmitted ? "Submitting..." : "Submit"} />
       </form>
