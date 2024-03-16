@@ -83,14 +83,9 @@ const TeleopScoutForm = ({ username }) => {
 
   return (
     <div>
-      <Header
-        toWhere={`/matchscout-team-form/${teamNumber}/auto`}
-        headerText={
-          <>
-            <span style={{ color: "#FFFFFF" }}>Teleop</span>
-          </>
-        }
-      />
+      <h1 style={{
+        padding:"30px"
+      }}>Teleop</h1>
       <form onSubmit={handleSubmit} className="teleopScout">
         <Counter
           label="Notes Scored in Speaker"
