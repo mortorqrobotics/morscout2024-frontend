@@ -25,7 +25,10 @@ const AutoScoutForm = ({ username }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    const confirmed = window.confirm("Are you sure you want to submit? You won't be able to come back to this page.");
+    if (confirmed) {
+      setFormSubmitted(true);
+    }
   };
 
   useEffect(() => {
