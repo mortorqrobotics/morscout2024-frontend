@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SubmitButton from "../../components/submitBtn/submitBtn";
 import Header from "../../components/header/header";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
-import { submitAutoScout } from "../../api/server"; // Assuming you have a function for auto scouting
+import { submitAutoScout } from "../../api/server";
 import Counter from "../../components/counter/counter";
 import Dropdown from "../../components/dropdown/dropdown";
 
-const CHOICEYESNOBLANK = ["", "Yes", "No"]; // Added blank for default
+const CHOICEYESNOBLANK = ["", "Yes", "No"];
 const DEFAULT_STATE = {
   notesScoredInSpeaker: 0,
   notesScoredInAmp: 0,
@@ -17,9 +17,8 @@ const DEFAULT_STATE = {
 };
 
 const AutoScoutForm = ({ username }) => {
-  const { teamNumber } = useParams();
+  const { teamNumber, matchNumber } = useParams();
   const navigate = useNavigate();
-
   const [formState, setFormState] = useState({ ...DEFAULT_STATE });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -47,6 +46,7 @@ const AutoScoutForm = ({ username }) => {
         submitAutoScout(teamNumber, {
           ...formState,
           username,
+          matchNumber,
         });
         toast.success("Auto Scout form submitted successfully");
         setFormState({ ...DEFAULT_STATE });
@@ -61,7 +61,7 @@ const AutoScoutForm = ({ username }) => {
     if (formSubmitted) {
       submitForm();
     }
-  }, [formSubmitted, formState, navigate, teamNumber, username]);
+  }, [formSubmitted, formState, navigate, teamNumber, username, matchNumber]);
 
   return (
     <div>

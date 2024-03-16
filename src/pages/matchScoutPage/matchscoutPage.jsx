@@ -3,13 +3,15 @@ import "./matchScoutPage.css";
 import Header from "../../components/header/header";
 import MatchButton from "../../components/matchButton/matchButton";
 import { getEventMatches } from "../../api/tba";
-import SearchBar from "../../components/searchbar/searchbar"; // Adjust the import path as needed
+import SearchBar from "../../components/searchbar/searchbar";
+import { useNavigate } from "react-router-dom";
 
 const MatchscoutPage = () => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -58,6 +60,7 @@ const MatchscoutPage = () => {
                     ...match.red_team.map((team) => team.substring(3)),
                     ...match.blue_team.map((team) => team.substring(3)),
                   ]}
+                  matchNum={match.matchNum} // Pass matchNum prop to MatchButton
                 />
               </div>
             ))}
@@ -67,7 +70,6 @@ const MatchscoutPage = () => {
     </div>
   );
 };
-
 
 const Heading = ({ children }) => <h2 className="match-heading">{children}</h2>;
 
