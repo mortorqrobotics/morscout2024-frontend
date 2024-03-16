@@ -11,8 +11,8 @@ import "./ts.css";
 
 const CHOICEYESNOBLANK = ["-", "Yes", "No"];
 const DEFAULT_STATE = {
-  notesScoredInSpeaker: 0,
-  notesScoredInAmp: 0,
+  notesScoredInSpeakerInTeleop: 0,
+  notesScoredInAmpInTeleop: 0,
   trap: "",
   guyThrewTheRing: "",
   generalComments: "",
@@ -21,8 +21,8 @@ const DEFAULT_STATE = {
   climbRating: "-",
   climbComments: "",
   didRobotClimbWithAnother: "", // New state key
-  attemptedShotsInSpeaker: 0,
-  attemptedShotsInAmp: 0,
+  attemptedShotsInSpeakerInTeleop: 0,
+  attemptedShotsInAmpInTeleop: 0,
 };
 
 const TeleopScoutForm = ({ username }) => {
@@ -95,32 +95,32 @@ const TeleopScoutForm = ({ username }) => {
       <form onSubmit={handleSubmit} className="teleopScout">
         <Counter
           label="Notes Scored in Speaker"
-          name="notesScoredInSpeaker"
-          value={formState.notesScoredInSpeaker}
+          name="notesScoredInSpeakerInTeleop"
+          value={formState.notesScoredInSpeakerInTeleop}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
         />
         <Counter
           label="Notes Attempted in Speaker"
-          name="attemptedShotsInSpeaker"
-          value={formState.attemptedShotsInSpeaker}
+          name="attemptedShotsInSpeakerInTeleop"
+          value={formState.attemptedShotsInSpeakerInTeleop}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
         />
         <Counter
           label="Notes Scored in Amp"
-          name="notesScoredInAmp"
-          value={formState.notesScoredInAmp}
+          name="notesScoredInAmpInTeleop"
+          value={formState.notesScoredInAmpInTeleop}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
         />
         <Counter
           label="Notes Attempted in Amp"
-          name="attemptedShotsInAmp"
-          value={formState.attemptedShotsInAmp}
+          name="attemptedShotsInAmpInTeleop"
+          value={formState.attemptedShotsInAmpInTeleop}
           onChange={(name, value) =>
             setFormState({ ...formState, [name]: value })
           }
