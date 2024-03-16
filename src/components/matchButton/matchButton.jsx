@@ -12,7 +12,7 @@ const MatchButton = ({ teamNums, matchNum }) => {
             key={index}
             to={`/matchscout-team-form/${num}/auto/${matchNum}`}
           >
-            <button className="redButton">{num}</button>
+            <button className="blueButton">{num}</button>
           </Link>
         ))}
       </div>
@@ -22,7 +22,7 @@ const MatchButton = ({ teamNums, matchNum }) => {
             key={index + 3}
             to={`/matchscout-team-form/${num}/auto/${matchNum}`}
           >
-            <button className="blueButton">{num}</button>
+            <button className="redButton">{num}</button>
           </Link>
         ))}
       </div>
