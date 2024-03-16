@@ -1,6 +1,6 @@
 import MainPage from "./pages/mainPage/mainPage";
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom"; // Import useParams
 import AdminPage from "./pages/adminPage/adminPage";
 import Pitscoutpage from "./pages/pitScoutTeamSelectPage/pitScoutTeamSelectPage";
 import MatchscoutPage from "./pages/matchScoutPage/matchscoutPage";
@@ -12,9 +12,11 @@ import UserPage from "./pages/userPage/userPage";
 
 import { useEffect, useState } from "react";
 import Rankings from "./pages/rankings/rankings";
+
 function App() {
   const [username, setUsername] = useState(localStorage.getItem("username"));
   const navigate = useNavigate();
+  const { matchNumber } = useParams(); // Retrieve matchNumber using useParams
 
   useEffect(() => {
     if (!username || username.trim().length === 0) {
@@ -36,14 +38,15 @@ function App() {
       />
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/matchscout-team-choice" element={<MatchscoutPage />} />
+      <Route
+        path="/matchscout-team-form/:teamNumber/auto/:matchNumber"
+        element={<AutoScoutForm username={username} />}
+      />
 
+      <Route path="/rankings" element={<Rankings />} />
       <Route
         path="/matchscout-team-form/:teamNumber/auto"
         element={<AutoScoutForm username={username} />}
-      />
-      <Route
-        path="/rankings"
-        element={<Rankings/>}
       />
       <Route
         path="/matchscout-team-form/:teamNumber/teleop"
