@@ -1,4 +1,3 @@
-// AdminPage.js
 import Header from "../../components/header/header";
 import { getScoutData } from "../../api/server"; // Adjust import path
 import { utils, writeFile } from "xlsx"; // Import specific functions from xlsx
@@ -64,6 +63,20 @@ const AdminPage = () => {
           onClick={() => handlePullData("pitscout")}
         >
           Pull Pitscout Data
+        </button>
+        {/* Button to pull autoscout data */}
+        <button
+          className="admin-btn"
+          onClick={() => handlePullData("autoscout")}
+        >
+          Pull Autoscout Data
+        </button>
+        {/* Button to pull teleopscout data */}
+        <button
+          className="admin-btn"
+          onClick={() => handlePullData("teleopscout")}
+        >
+          Pull Teleopscout Data
         </button>
       </div>
     </div>
