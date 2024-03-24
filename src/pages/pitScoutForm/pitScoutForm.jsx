@@ -52,7 +52,7 @@ const PitScoutForm = ({ username }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitted(true);
-    
+
     // Exclude additionalComments field if it's empty
     const isFormIncomplete = Object.entries(formState)
       .filter(([key, value]) => key !== "additionalComments" || value !== "")
@@ -151,7 +151,12 @@ const PitScoutForm = ({ username }) => {
           onSelect={(value) => handleDropdownSelect(value, "scoringPosition")}
           defaultOption={formState.scoringPosition}
         />
-
+        <TextInput
+          label="Where can the robot shoot from? Ex: at the subwoofer, by the stage"
+          name="shootFrom"
+          value={formState.shootFrom}
+          onChange={handleChange}
+        />
         <TextInput
           label="Estimated Cycle Time (human player station to shooting)? (s)"
           name="estimatedCycleTime"
@@ -192,13 +197,6 @@ const PitScoutForm = ({ username }) => {
           options={CHOICEYESNO}
           onSelect={(value) => handleDropdownSelect(value, "trap")}
           defaultOption={formState.trap}
-        />
-
-        <TextInput
-          label="Where can the robot shoot from?"
-          name="shootFrom"
-          value={formState.shootFrom}
-          onChange={handleChange}
         />
 
         <TextInput

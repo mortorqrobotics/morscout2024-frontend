@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "../../components/header/header";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import Dropdown from "../../components/dropdown/dropdown";
 import TextInput from "../../components/textInput/textInput";
 import SubmitButton from "../../components/submitBtn/submitBtn";
 import "./ts.css";
+import TextBox from "../../components/textBox/textBox";
 
 const CHOICEYESNOBLANK = ["-", "Yes", "No"];
 const DEFAULT_STATE = {
@@ -23,6 +24,7 @@ const DEFAULT_STATE = {
   didRobotClimbWithAnother: "", // New state key
   attemptedShotsInSpeakerInTeleop: 0,
   attemptedShotsInAmpInTeleop: 0,
+  defenseRating: "",
 };
 
 const TeleopScoutForm = ({ username }) => {
@@ -57,7 +59,7 @@ const TeleopScoutForm = ({ username }) => {
       const response = await submitTeleop(teamNumber, {
         ...formState,
         username,
-        matchNumber
+        matchNumber,
       });
       if (response.ok) {
         toast.success("TeleopScout form submitted successfully");
@@ -163,7 +165,7 @@ const TeleopScoutForm = ({ username }) => {
           onSelect={handleClimbRatingChange}
           defaultOption={formState.climbRating}
         />
-        <TextInput
+        <TextBox
           label="Climb Comments"
           name="climbComments"
           value={formState.climbComments}
@@ -172,14 +174,14 @@ const TeleopScoutForm = ({ username }) => {
           }
         />
         <Dropdown
-          label="Did they play defense?"
-          options={CHOICEYESNOBLANK}
+          label="Defense Rating"
+          options={["-", "No Defense", "1", "2", "3", "4", "5"]}
           onSelect={(value) =>
-            setFormState({ ...formState, didTheyDoDefense: value })
+            setFormState({ ...formState, defenseRating: value })
           }
-          defaultOption={formState.didTheyDoDefense}
+          defaultOption={formState.defenseRating}
         />
-        <TextInput
+        <TextBox
           label="Comments"
           name="generalComments"
           value={formState.generalComments}
