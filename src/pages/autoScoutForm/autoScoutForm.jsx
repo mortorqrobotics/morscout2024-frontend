@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SubmitButton from "../../components/submitBtn/submitBtn";
 import Header from "../../components/header/header";
 import { toast } from "react-hot-toast";
@@ -50,7 +50,7 @@ const AutoScoutForm = ({ username }) => {
         });
         toast.success("Auto Scout form submitted successfully");
         setFormState({ ...DEFAULT_STATE });
-        navigate(`/matchscout-team-form/${teamNumber}/teleop`);
+        navigate(`/matchscout-team-form/${teamNumber}/teleop/${matchNumber}`);
       } catch (error) {
         toast.error("Auto Scout form submission failed");
         console.error(error);
