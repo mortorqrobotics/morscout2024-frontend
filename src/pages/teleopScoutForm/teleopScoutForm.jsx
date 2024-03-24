@@ -26,7 +26,7 @@ const DEFAULT_STATE = {
 };
 
 const TeleopScoutForm = ({ username }) => {
-  const { teamNumber } = useParams();
+  const { teamNumber, matchNumber } = useParams();
   const navigate = useNavigate();
 
   const [formState, setFormState] = useState({ ...DEFAULT_STATE });
@@ -57,6 +57,7 @@ const TeleopScoutForm = ({ username }) => {
       const response = await submitTeleop(teamNumber, {
         ...formState,
         username,
+        matchNumber
       });
       if (response.ok) {
         toast.success("TeleopScout form submitted successfully");
