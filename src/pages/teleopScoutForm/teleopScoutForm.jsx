@@ -94,7 +94,7 @@ const TeleopScoutForm = ({ username }) => {
 
   return (
     <div>
-      <Header toWhere="/" headerText="Teleop" />
+      <Header headerText="Teleop" />
       <form onSubmit={handleSubmit} className="teleopScout">
         <Counter
           label="Notes Scored in Speaker"
