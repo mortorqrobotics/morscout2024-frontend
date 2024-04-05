@@ -18,7 +18,6 @@ const DEFAULT_STATE = {
   guyThrewTheRing: "",
   generalComments: "",
   robotSpeed: "-",
-  didTheyDoDefense: "-",
   climbRating: "-",
   climbComments: "",
   didRobotClimbWithAnother: "", // New state key
@@ -94,7 +93,7 @@ const TeleopScoutForm = ({ username }) => {
 
   return (
     <div>
-      <Header headerText="Teleop" />
+      <h1 style={{paddingTop:"20px"}}>Teleop</h1>
       <form onSubmit={handleSubmit} className="teleopScout">
         <Counter
           label="Notes Scored in Speaker"
