@@ -1,0 +1,23 @@
+.form-group {
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  .form-control {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid white; /* Changed border style to 'solid' */
+    width: 100%;
+    height: 120px; /* Adjusted height to match the text input */
+    padding: 10px; /* Adjusted padding for better spacing */
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    resize: none; /* Prevent resizing of the textarea */
+  }
+  
