@@ -1,30 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./matchButton.css";
 
 const MatchButton = ({ teamNums, matchNum }) => {
+  const navigate = useNavigate();
+
   return (
-    <div>
-      <hr />
-      <div className="line">
+    <div className="match-card">
+      <div className="alliance-row red-alliance">
         {teamNums.slice(0, 3).map((num, index) => (
-          <Link
+          <button
             key={index}
-            to={`/matchscout-team-form/${num}/${matchNum}`}
+            className="team-button red"
+            onClick={() => navigate(`/matchscout-team-form/${num}/${matchNum}`)}
           >
-            <button className="redButton">{num}</button>
-          </Link>
+            <span className="team-number">#{num}</span>
+            <div className="scout-status">
+              <span className="status-dot"></span>
+              Not Scouted
+            </div>
+          </button>
         ))}
-        
       </div>
-      <div className="line">
+      
+      <div className="alliance-divider">
+        <span>VS</span>
+      </div>
+      
+      <div className="alliance-row blue-alliance">
         {teamNums.slice(3).map((num, index) => (
-          <Link
+          <button
             key={index + 3}
-            to={`/matchscout-team-form/${num}/${matchNum}`}
+            className="team-button blue"
+            onClick={() => navigate(`/matchscout-team-form/${num}/${matchNum}`)}
           >
-            <button className="blueButton">{num}</button>
-          </Link>
+            <span className="team-number">#{num}</span>
+            <div className="scout-status">
+              <span className="status-dot"></span>
+              Not Scouted
+            </div>
+          </button>
         ))}
       </div>
     </div>

@@ -29,12 +29,12 @@ const MatchscoutPage = () => {
     setSearchTerm(term);
   };
 
-  const filteredMatches = matches.filter((match, index) =>
-    `MATCH ${match.matchNum}`.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredMatches = matches.filter((match) =>
+    `${match.matchNum}`.includes(searchTerm)
   );
 
   return (
-    <div>
+    <div className="match-scout-page">
       <Header
         toWhere="/"
         headerText={
@@ -44,33 +44,47 @@ const MatchscoutPage = () => {
           </>
         }
       />
-      <div className="match-buttons">
-        <SearchBar searchText="Enter Match Number..." onSearch={handleSearch} />
+      
+      <div className="match-scout-content">
+        <SearchBar searchText="Search match number..." onSearch={handleSearch} />
+        
         {loading ? (
-          <h1>Loading...</h1>
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading matches...</p>
+          </div>
         ) : error ? (
-          <h1>{error.message}</h1>
-        ) : filteredMatches.length > 0 ? (
-          <div className="Matches">
+          <div className="error-state">
+            <p>Error: {error.message}</p>
+            <button onClick={() => window.location.reload()} className="retry-button">
+              Retry
+            </button>
+          </div>
+        ) : (
+          <div className="matches-list">
             {filteredMatches.map((match) => (
-              <div className="matchAndHeading" key={match.matchNum}>
-                <Heading>{`MATCH ${match.matchNum}`}</Heading>
+              <div key={match.matchNum} className="match-container">
+                <h2 className="match-heading">Qualification {match.matchNum}</h2>
                 <MatchButton
                   teamNums={[
                     ...match.red_team.map((team) => team.substring(3)),
                     ...match.blue_team.map((team) => team.substring(3)),
                   ]}
-                  matchNum={match.matchNum} // Pass matchNum prop to MatchButton
+                  matchNum={match.matchNum}
                 />
               </div>
             ))}
           </div>
-        ) : <p>No matches found</p>}
+        )}
+        
+        {!loading && !error && filteredMatches.length === 0 && (
+          <div className="no-results">
+            <p>No matches found</p>
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
-const Heading = ({ children }) => <h2 className="match-heading">{children}</h2>;
 
 export default MatchscoutPage;

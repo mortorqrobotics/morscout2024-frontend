@@ -1,22 +1,22 @@
-import PitButton from "../../components/pitButton/pitButton";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getEventTeamsNumbers } from "../../api/tba";
 import Header from "../../components/header/header";
 import SearchBar from "../../components/searchbar/searchbar";
-import { useEffect, useState } from "react";
-import { getEventTeamsNumbers } from "../../api/tba";
-
-import { Link } from "react-router-dom";
+import "./pitScoutTeamSelectPage.css";
 
 const Pitscoutpage = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [filteredTeams, setFilteredTeams] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
     getEventTeamsNumbers()
       .then((data) => {
-        const sortedTeams = data.sort((a, b) => a.teamNumber - b.teamNumber); // Sort teams by team number
+        const sortedTeams = data.sort((a, b) => a.teamNumber - b.teamNumber);
         setTeams(sortedTeams);
         setFilteredTeams(sortedTeams);
       })
@@ -32,7 +32,7 @@ const Pitscoutpage = () => {
   };
 
   return (
-    <div>
+    <div className="team-select-page">
       <Header
         toWhere="/"
         headerText={
@@ -42,19 +42,52 @@ const Pitscoutpage = () => {
           </>
         }
       />
-      <SearchBar onSearch={handleSearch} searchText="Search by Team Number" />
-      <br />
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : error ? (
-        <h1>{error.message}</h1>
-      ) : filteredTeams.length > 0 ? (
-        filteredTeams.map((team) => (
-          <Link key={team.teamNumber} to={`/pit-team-form/${team.teamNumber}`}>
-            <PitButton text={`Team ${team.teamNumber}`} />
-          </Link>
-        ))
-      ) : null}
+      
+      <div className="team-select-content">
+        <SearchBar onSearch={handleSearch} searchText="Search by Team Number" />
+        
+        {loading ? (
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading teams...</p>
+          </div>
+        ) : error ? (
+          <div className="error-state">
+            <p>Error: {error.message}</p>
+            <button onClick={() => window.location.reload()} className="retry-button">
+              Retry
+            </button>
+          </div>
+        ) : (
+          <div className="teams-grid">
+            {filteredTeams.map((team) => (
+              <button
+                key={team.teamNumber}
+                className="team-card"
+                onClick={() => navigate(`/pit-team-form/${team.teamNumber}`)}
+              >
+                <span className="team-number">#{team.teamNumber}</span>
+                <div className="team-stats">
+                  <span className="stat">
+                    <span className="stat-label">Match Scouts:</span>
+                    <span className="stat-value">0</span>
+                  </span>
+                  <span className="stat">
+                    <span className="stat-label">Pit Scouts:</span>
+                    <span className="stat-value">0</span>
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
+        
+        {!loading && !error && filteredTeams.length === 0 && (
+          <div className="no-results">
+            <p>No teams found</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

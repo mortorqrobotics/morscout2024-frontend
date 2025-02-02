@@ -11,26 +11,40 @@ import "./matchScout.css";
 import ScoringCounter from '../../components/scoringCounter/scoringCounter';
 
 const CHOICEYESNOBLANK = ["-", "Yes", "No"];
+const SCORING_LEVELS = ["-", "L1", "L2", "L3", "L4"];
+
 const DEFAULT_STATE = {
   // Auto
-  notesScoredInSpeaker: 0,
-  notesScoredInAmp: 0,
-  leftRobotStartingZone: "",
-  attemptedShotsInSpeaker: 0,
-  attemptedShotsInAmp: 0,
+  autoL1Scores: 0,
+  autoL2Scores: 0,
+  autoL3Scores: 0,
+  autoL4Scores: 0,
+  autoL1Attempts: 0,
+  autoL2Attempts: 0,
+  autoL3Attempts: 0,
+  autoL4Attempts: 0,
+  leftStartingZone: "",
   
   // Teleop
-  notesScoredInSpeakerInTeleop: 0,
-  notesScoredInAmpInTeleop: 0,
-  attemptedShotsInSpeakerInTeleop: 0,
-  attemptedShotsInAmpInTeleop: 0,
-  trap: "",
-  guyThrewTheRing: "",
-  robotSpeed: "-",
-  climbRating: "-",
+  teleopL1Scores: 0,
+  teleopL2Scores: 0,
+  teleopL3Scores: 0,
+  teleopL4Scores: 0,
+  teleopL1Attempts: 0,
+  teleopL2Attempts: 0,
+  teleopL3Attempts: 0,
+  teleopL4Attempts: 0,
+  scoredInNet: "",
+  
+  // Climb
+  climbLevel: "-",
+  climbSuccess: "",
+  climbAttemptTime: "",
   climbComments: "",
-  didRobotClimbWithAnother: "",
-  defenseRating: "",
+  
+  // General
+  robotSpeed: "-",
+  defenseRating: "-",
   generalComments: "",
 };
 
@@ -82,48 +96,15 @@ const MatchScoutForm = ({ username }) => {
     }
   };
 
-  const handleClimbRatingChange = (value) => {
-    if (value === "No Climb") {
-      setFormState((prevState) => ({
-        ...prevState,
-        climbRating: value,
-        climbComments: "",
-      }));
-    } else {
-      setFormState((prevState) => ({
-        ...prevState,
-        climbRating: value,
-      }));
-    }
-  };
-
   const handleNotesScored = (name, value) => {
-    // Update both scored and attempted counts
-    if (name === "notesScoredInSpeaker") {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: value,
-        attemptedShotsInSpeaker: Math.max(value, prevState.attemptedShotsInSpeaker)
-      }));
-    } else if (name === "notesScoredInAmp") {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: value,
-        attemptedShotsInAmp: Math.max(value, prevState.attemptedShotsInAmp)
-      }));
-    } else if (name === "notesScoredInSpeakerInTeleop") {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: value,
-        attemptedShotsInSpeakerInTeleop: Math.max(value, prevState.attemptedShotsInSpeakerInTeleop)
-      }));
-    } else if (name === "notesScoredInAmpInTeleop") {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: value,
-        attemptedShotsInAmpInTeleop: Math.max(value, prevState.attemptedShotsInAmpInTeleop)
-      }));
-    }
+    const level = name.match(/L\d/)[0];
+    const phase = name.includes('auto') ? 'auto' : 'teleop';
+    
+    setFormState(prevState => ({
+      ...prevState,
+      [name]: value,
+      [`${phase}${level}Attempts`]: Math.max(value, prevState[`${phase}${level}Attempts`])
+    }));
   };
 
   return (
@@ -137,123 +118,87 @@ const MatchScoutForm = ({ username }) => {
         }
       />
       <form onSubmit={handleSubmit} className="matchScout">
-        {/* Scoring Section - Auto */}
+        {/* Auto Scoring Section */}
         <div className="scout-section">
           <h2>Auto Period - Scoring</h2>
-          <div className="scoring-group">
-            <div className="scoring-subsection">
-              <h3>Speaker</h3>
+          {SCORING_LEVELS.slice(1).map((level) => (
+            <div key={`auto${level}`} className="scoring-subsection">
+              <h3>{level}</h3>
               <ScoringCounter
-                scoredValue={formState.notesScoredInSpeaker}
-                attemptedValue={formState.attemptedShotsInSpeaker}
-                onScoredChange={(value) => handleNotesScored("notesScoredInSpeaker", value)}
+                scoredValue={formState[`auto${level}Scores`]}
+                attemptedValue={formState[`auto${level}Attempts`]}
+                onScoredChange={(value) => handleNotesScored(`auto${level}Scores`, value)}
                 onAttemptedChange={(value) => 
                   setFormState(prevState => ({
                     ...prevState,
-                    attemptedShotsInSpeaker: Math.max(value, prevState.notesScoredInSpeaker)
+                    [`auto${level}Attempts`]: Math.max(value, prevState[`auto${level}Scores`])
                   }))
                 }
               />
             </div>
-            <div className="scoring-subsection">
-              <h3>Amp</h3>
-              <ScoringCounter
-                scoredValue={formState.notesScoredInAmp}
-                attemptedValue={formState.attemptedShotsInAmp}
-                onScoredChange={(value) => handleNotesScored("notesScoredInAmp", value)}
-                onAttemptedChange={(value) => 
-                  setFormState(prevState => ({
-                    ...prevState,
-                    attemptedShotsInAmp: Math.max(value, prevState.notesScoredInAmp)
-                  }))
-                }
-              />
-            </div>
-          </div>
+          ))}
           <Dropdown
-            label="Robot left Starting Zone?"
+            label="Left Starting Zone?"
             options={CHOICEYESNOBLANK}
-            onSelect={(value) =>
-              setFormState({ ...formState, leftRobotStartingZone: value })
-            }
-            defaultOption={formState.leftRobotStartingZone}
+            onSelect={(value) => setFormState({ ...formState, leftStartingZone: value })}
+            defaultOption={formState.leftStartingZone}
           />
         </div>
 
-        {/* Scoring Section - Teleop */}
+        {/* Teleop Scoring Section */}
         <div className="scout-section">
           <h2>Teleop Period - Scoring</h2>
-          <div className="scoring-group">
-            <div className="scoring-subsection">
-              <h3>Speaker</h3>
+          {SCORING_LEVELS.slice(1).map((level) => (
+            <div key={`teleop${level}`} className="scoring-subsection">
+              <h3>{level}</h3>
               <ScoringCounter
-                scoredValue={formState.notesScoredInSpeakerInTeleop}
-                attemptedValue={formState.attemptedShotsInSpeakerInTeleop}
-                onScoredChange={(value) => handleNotesScored("notesScoredInSpeakerInTeleop", value)}
+                scoredValue={formState[`teleop${level}Scores`]}
+                attemptedValue={formState[`teleop${level}Attempts`]}
+                onScoredChange={(value) => handleNotesScored(`teleop${level}Scores`, value)}
                 onAttemptedChange={(value) => 
                   setFormState(prevState => ({
                     ...prevState,
-                    attemptedShotsInSpeakerInTeleop: Math.max(value, prevState.notesScoredInSpeakerInTeleop)
+                    [`teleop${level}Attempts`]: Math.max(value, prevState[`teleop${level}Scores`])
                   }))
                 }
               />
             </div>
-            <div className="scoring-subsection">
-              <h3>Amp</h3>
-              <ScoringCounter
-                scoredValue={formState.notesScoredInAmpInTeleop}
-                attemptedValue={formState.attemptedShotsInAmpInTeleop}
-                onScoredChange={(value) => handleNotesScored("notesScoredInAmpInTeleop", value)}
-                onAttemptedChange={(value) => 
-                  setFormState(prevState => ({
-                    ...prevState,
-                    attemptedShotsInAmpInTeleop: Math.max(value, prevState.notesScoredInAmpInTeleop)
-                  }))
-                }
-              />
-            </div>
-          </div>
+          ))}
+          <Dropdown
+            label="Scored in Net?"
+            options={CHOICEYESNOBLANK}
+            onSelect={(value) => setFormState({ ...formState, scoredInNet: value })}
+            defaultOption={formState.scoredInNet}
+          />
         </div>
 
-        {/* End Game Section */}
+        {/* Climb Section */}
         <div className="scout-section">
-          <h2>End Game</h2>
-          <Dropdown
-            label="Scored in Trap?"
-            options={CHOICEYESNOBLANK}
-            onSelect={(value) => setFormState({ ...formState, trap: value })}
-            defaultOption={formState.trap}
-          />
-          <Dropdown
-            label="Human Player Scored Microphone?"
-            options={CHOICEYESNOBLANK}
-            onSelect={(value) =>
-              setFormState({ ...formState, guyThrewTheRing: value })
-            }
-            defaultOption={formState.guyThrewTheRing}
-          />
+          <h2>Climb</h2>
           <div className="climb-section">
             <Dropdown
-              label="Climb Rating"
-              options={["-", "No Climb", "1", "2", "3", "4", "5"]}
-              onSelect={handleClimbRatingChange}
-              defaultOption={formState.climbRating}
+              label="Climb Level Attempted"
+              options={SCORING_LEVELS}
+              onSelect={(value) => setFormState({ ...formState, climbLevel: value })}
+              defaultOption={formState.climbLevel}
             />
             <Dropdown
-              label="Climbed with another robot?"
+              label="Successful Climb?"
               options={CHOICEYESNOBLANK}
-              onSelect={(value) =>
-                setFormState({ ...formState, didRobotClimbWithAnother: value })
-              }
-              defaultOption={formState.didRobotClimbWithAnother}
+              onSelect={(value) => setFormState({ ...formState, climbSuccess: value })}
+              defaultOption={formState.climbSuccess}
+            />
+            <Dropdown
+              label="When did they attempt to climb?"
+              options={["-", "Early (>30s)", "Mid (15-30s)", "Late (<15s)"]}
+              onSelect={(value) => setFormState({ ...formState, climbAttemptTime: value })}
+              defaultOption={formState.climbAttemptTime}
             />
             <TextBox
               label="Climb Comments"
               name="climbComments"
               value={formState.climbComments}
-              onChange={(e) =>
-                setFormState({ ...formState, climbComments: e.target.value })
-              }
+              onChange={(e) => setFormState({ ...formState, climbComments: e.target.value })}
             />
           </div>
         </div>
@@ -264,26 +209,20 @@ const MatchScoutForm = ({ username }) => {
           <Dropdown
             label="Robot Speed"
             options={["-", "Slow", "Medium", "Fast"]}
-            onSelect={(value) =>
-              setFormState({ ...formState, robotSpeed: value })
-            }
+            onSelect={(value) => setFormState({ ...formState, robotSpeed: value })}
             defaultOption={formState.robotSpeed}
           />
           <Dropdown
             label="Defense Rating"
             options={["-", "No Defense", "1", "2", "3", "4", "5"]}
-            onSelect={(value) =>
-              setFormState({ ...formState, defenseRating: value })
-            }
+            onSelect={(value) => setFormState({ ...formState, defenseRating: value })}
             defaultOption={formState.defenseRating}
           />
           <TextBox
             label="General Comments"
             name="generalComments"
             value={formState.generalComments}
-            onChange={(e) =>
-              setFormState({ ...formState, generalComments: e.target.value })
-            }
+            onChange={(e) => setFormState({ ...formState, generalComments: e.target.value })}
           />
         </div>
 
