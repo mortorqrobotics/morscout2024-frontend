@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .input-field {
   position: relative;
@@ -13,7 +13,7 @@
 
 .input-field label {
   color: white;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-weight: 500;
   font-size: 16px;
   text-align: center;
@@ -31,7 +31,7 @@
   height: 48px;
   width: 100%;
   font-weight: 500;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Jost', sans-serif;
   font-optical-sizing: auto;
   transition: all 0.3s ease;
 }
