@@ -5,11 +5,10 @@ import AdminPage from "./pages/adminPage/adminPage";
 import Pitscoutpage from "./pages/pitScoutTeamSelectPage/pitScoutTeamSelectPage";
 import MatchscoutPage from "./pages/matchScoutPage/matchscoutPage";
 import PitScoutForm from "./pages/pitScoutForm/pitScoutForm";
-import AutoScoutForm from "./pages/autoScoutForm/autoScoutForm";
-import TeleopScoutForm from "./pages/teleopScoutForm/teleopScoutForm";
+import MatchScoutForm from "./pages/matchScoutForm/matchScoutForm";
 import LoginPage from "./pages/loginPage/loginPage";
 import UserPage from "./pages/userPage/userPage";
-
+import { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import Rankings from "./pages/rankings/rankings";
 
@@ -29,30 +28,29 @@ function App() {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<MainPage username={username} />} />
-      <Route
-        path="/login"
-        element={<LoginPage changeUsername={changeUsername} />}
-      />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/rankings" element={<Rankings />} />
-      <Route path="/userpage" element={<UserPage />} />
-      <Route path="/pit-team-choice" element={<Pitscoutpage />} />
-      <Route
-        path="/pit-team-form/:teamNumber"
-        element={<PitScoutForm username={username} />}
-      />
-      <Route path="/matchscout-team-choice" element={<MatchscoutPage />} />
-      <Route
-        path="/matchscout-team-form/:teamNumber/auto/:matchNumber"
-        element={<AutoScoutForm username={username} />}
-      />
-      <Route
-        path="/matchscout-team-form/:teamNumber/teleop/:matchNumber"
-        element={<TeleopScoutForm username={username} />}
-      />
-    </Routes>
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      <Routes>
+        <Route path="/" element={<MainPage username={username} />} />
+        <Route
+          path="/login"
+          element={<LoginPage changeUsername={changeUsername} />}
+        />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/rankings" element={<Rankings />} />
+        <Route path="/userpage" element={<UserPage />} />
+        <Route path="/pit-team-choice" element={<Pitscoutpage />} />
+        <Route
+          path="/pit-team-form/:teamNumber"
+          element={<PitScoutForm username={username} />}
+        />
+        <Route path="/matchscout-team-choice" element={<MatchscoutPage />} />
+        <Route
+          path="/matchscout-team-form/:teamNumber/:matchNumber"
+          element={<MatchScoutForm username={username} />}
+        />
+      </Routes>
+    </>
   );
 }
 

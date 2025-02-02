@@ -39,6 +39,22 @@ export const submitAutoScout = async (teamNumber, data) => {
     );
 };
 
+export const submitMatchScout = async (teamNumber, data) => {
+  try {
+    const response = await fetch(`${BACKEND_URL}/matchscout/${teamNumber}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response;
+  } catch (error) {
+    console.error("Error submitting match scout:", error);
+    throw error;
+  }
+};
+
 export const getScoutData = async (scoutType) => {
   try {
     const response = await fetch(`${BACKEND_URL}/${scoutType}`);

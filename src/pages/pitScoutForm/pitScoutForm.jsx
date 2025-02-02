@@ -7,7 +7,6 @@ import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
-import "../teleopScoutForm/ts.css";
 
 const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
 const SCORINGPOSITIONS = ["-", "Amp", "Speaker", "Both"]; // Blank added for default
