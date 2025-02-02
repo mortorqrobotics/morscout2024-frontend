@@ -13,35 +13,9 @@ export const submitPitscout = async (teamNumber, data) => {
     );
 };
 
-export const submitTeleop = async (teamNumber, data) => {
-    return await fetch(
-        `${BACKEND_URL}/submit-teleopscout/${teamNumber}`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        }
-    );
-};
-
-export const submitAutoScout = async (teamNumber, data) => {
-    return await fetch(
-        `${BACKEND_URL}/submit-autoscout/${teamNumber}`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        }
-    );
-};
-
 export const submitMatchScout = async (teamNumber, data) => {
   try {
-    const response = await fetch(`${BACKEND_URL}/matchscout/${teamNumber}`, {
+    const response = await fetch(`${BACKEND_URL}/api/matchscout/${teamNumber}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
