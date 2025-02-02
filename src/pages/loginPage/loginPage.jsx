@@ -3,28 +3,27 @@ import "./loginPage.css";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Autocomplete from "../../components/Autocomplete";
+import { teamMembers } from "../../data/teamMembers";
 
 const LoginPage = ({ changeUsername }) => {
-  const [username, setUsername] = useState("");
-  const [userOptions, setUserOptions] = useState(["Alice", "Bob", "Charlie", "David", "Eve"]); // Example names
+  const navigate = useNavigate();
 
-  const handleUsernameChange = (name) => {
-    setUsername(name);
-    changeUsername(name);
+  const handleSelect = (selectedName) => {
+    if (selectedName) {
+      changeUsername(selectedName);
+      navigate("/");
+    }
   };
 
   return (
     <div className="login">
       <form className="login-form">
         <label className="login-label">Login</label>
-        <Autocomplete options={userOptions} onSelect={handleUsernameChange} />
-        <button
-          type="button"
-          className="login-button"
-          onClick={() => handleUsernameChange(username)}
-        >
-          Login
-        </button>
+        <Autocomplete 
+          options={teamMembers}
+          onSelect={handleSelect}
+          placeholder="Type your name..."
+        />
       </form>
     </div>
   );

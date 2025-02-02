@@ -1,25 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 .input-field {
-  text-align: center;
+  position: relative;
   display: flex;
-  gap: 10px;
   flex-direction: column;
-  align-items:flex-start;
+  align-items: center;
+  gap: 12px;
+  margin: 16px auto;
+  width: 100%;
+  max-width: 300px;
+}
+
+.input-field label {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
   width: 100%;
 }
 
-.text-input{
-    background-color: transparent;
-    border-radius: 5px;
-    border: 1px white;
-    border-style: solid;
+.text-input {
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  align-items: center;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 0 20px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  transition: all 0.3s ease;
+}
+
+.text-input:hover {
+  border-color: #FF5F00;
+  background-color: #242424;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #FF5F00;
+  box-shadow: 0 0 0 2px rgba(255, 95, 0, 0.2);
+}
+
+.text-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Disabled state */
+.text-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #1a1a1a;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .input-field {
+    min-width: auto;
     width: 100%;
-    height: 40px;
-    padding: 0 10px;
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Autocomplete.css';
 
-const Autocomplete = ({ options, onSelect }) => {
+const Autocomplete = ({ options, onSelect, placeholder }) => {
   const [inputValue, setInputValue] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
 
@@ -31,7 +31,7 @@ const Autocomplete = ({ options, onSelect }) => {
         type="text"
         value={inputValue}
         onChange={handleChange}
-        placeholder="Type your name..."
+        placeholder={placeholder}
       />
       {filteredOptions.length > 0 && (
         <ul className="autocomplete-list">

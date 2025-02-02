@@ -48,3 +48,133 @@
         font-size: 18px
       }
   }
+
+.match-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  animation: slideUp 0.3s ease-out;
+}
+
+.alliance-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.alliance-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.team-button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.team-button.red {
+  background: rgba(255, 59, 48, 0.1);
+  border-color: rgba(255, 59, 48, 0.2);
+}
+
+.team-button.blue {
+  background: rgba(0, 122, 255, 0.1);
+  border-color: rgba(0, 122, 255, 0.2);
+}
+
+.team-button:active {
+  transform: scale(0.98);
+}
+
+.team-button .team-number {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.red .team-number {
+  color: #ff3b30;
+}
+
+.blue .team-number {
+  color: #007aff;
+}
+
+.scout-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+}
+
+.red .status-dot {
+  background: #ff3b30;
+}
+
+.blue .status-dot {
+  background: #007aff;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 360px) {
+  .team-button {
+    padding: 8px;
+  }
+
+  .team-button .team-number {
+    font-size: 16px;
+  }
+
+  .scout-status {
+    font-size: 10px;
+  }
+}
+
+/* Match heading styles */
+.match-heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: var(--spacing-md);
+  background: rgba(255, 95, 0, 0.1);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}

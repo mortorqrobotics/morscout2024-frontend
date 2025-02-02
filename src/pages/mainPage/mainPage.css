@@ -16,18 +16,315 @@
   width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
-  padding: 20px;
-  opacity: 0; /* Initially set opacity to 0 */
-  animation: fadeIn 1s ease; /* Apply fade-in animation */
+  padding: var(--spacing-md);
+  opacity: 1; /* Keep elements visible */
+  animation: slideUpFade 0.5s ease-out;
 }
-@keyframes fadeIn {
+
+@keyframes slideUpFade {
   from {
     opacity: 0;
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.page-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+  animation: fadeIn 0.5s ease-out 0.2s both;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s;
+}
+
+.stat-card:active {
+  transform: scale(0.97);
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.action-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  animation: fadeIn 0.5s ease-out 0.3s both;
+}
+
+.action-card {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--surface-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: 
+    "icon title"
+    "icon description";
+  gap: 4px var(--spacing-md);
+  align-items: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.action-card:active {
+  transform: scale(0.98);
+  background: var(--surface-light);
+}
+
+.action-icon {
+  grid-area: icon;
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  background: var(--primary-light);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-card h3 {
+  grid-area: title;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.action-card p {
+  grid-area: description;
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add pull-to-refresh animation */
+.refresh-spinner {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.refreshing .refresh-spinner {
+  opacity: 1;
+}
+
+/* Add skeleton loading state */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--surface-light) 50%,
+    var(--surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .action-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Add ripple effect for touch feedback */
+.action-card::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, var(--primary-light) 1%, transparent 1%) center/15000%;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.action-card:active::after {
+  opacity: 1;
+  background-size: 100%;
+  transition: all 0s ease;
+}
+
+/* Add loading states */
+.loading .stat-card,
+.loading .action-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading .stat-card::before,
+.loading .action-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--surface-light) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+/* Add these styles to your existing CSS */
+
+.current-match {
+  margin-bottom: var(--spacing-xl);
+  animation: fadeIn 0.5s ease-out 0.1s both;
+}
+
+.current-match h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-md);
+}
+
+.match-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+
+.match-number {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.alliances {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.alliance {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.alliance.red .team-number {
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  border: 1px solid rgba(255, 59, 48, 0.2);
+}
+
+.alliance.blue .team-number {
+  background: rgba(0, 122, 255, 0.1);
+  color: #007aff;
+  border: 1px solid rgba(0, 122, 255, 0.2);
+}
+
+.team-number {
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.team-number:active {
+  transform: scale(0.97);
+}
+
+.alliance-divider {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0 var(--spacing-sm);
+}
+
+/* Loading state for match card */
+.loading .match-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading .match-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--surface-light) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
 }
