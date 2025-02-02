@@ -3,21 +3,22 @@ import "./header.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Header = (props) => {
+const Header = ({ toWhere, headerText }) => {
   return (
-    <div>
-      <nav>
-        <Link to={props.toWhere}>
-          <ArrowBackIcon className="backIcon" style={{ fill: " #fff" }} />
+    <header className="header">
+      <nav className="nav-container">
+        <Link to={toWhere} className="back-link">
+          <ArrowBackIcon className="back-icon" />
         </Link>
-
-        <h2 className="header-text">{props.headerText}</h2>
+        <h2 className="header-text">{headerText}</h2>
       </nav>
-    </div>
+    </header>
   );
 };
+
 Header.propTypes = {
   toWhere: PropTypes.string,
+  headerText: PropTypes.node,
 };
 
 export default Header;

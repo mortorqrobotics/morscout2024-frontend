@@ -36,10 +36,11 @@
 }
 
 .scoring-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  width: 100%;
 }
 
 .scoring-subsection {
@@ -300,4 +301,26 @@ form {
   margin-bottom: 8px;
   color: #ffffff;
   font-weight: 500;
+}
+
+.scoring-label-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.scoring-label {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.starting-zone-section {
+  display: flex;
+  justify-content: center;
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-sm);
 } 
