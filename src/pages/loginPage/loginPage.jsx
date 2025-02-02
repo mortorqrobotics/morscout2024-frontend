@@ -2,27 +2,29 @@ import { useState } from "react";
 import "./loginPage.css";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import Autocomplete from "../../components/Autocomplete";
 
 const LoginPage = ({ changeUsername }) => {
-  const [userName, setUserName] = useState("");
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    changeUsername(userName);
+  const [username, setUsername] = useState("");
+  const [userOptions, setUserOptions] = useState(["Alice", "Bob", "Charlie", "David", "Eve"]); // Example names
 
-    navigate("/");
+  const handleUsernameChange = (name) => {
+    setUsername(name);
+    changeUsername(name);
   };
+
   return (
     <div className="login">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="userName" className="login-label">Full Name : </label>
-        <input
-          onChange={(e) => setUserName(e.target.value)}
-          value={userName}
-          type="text"
-          className="login-input"
-        />
-        <button type="submit" className="login-button">Login</button>
+      <form className="login-form">
+        <label className="login-label">Login</label>
+        <Autocomplete options={userOptions} onSelect={handleUsernameChange} />
+        <button
+          type="button"
+          className="login-button"
+          onClick={() => handleUsernameChange(username)}
+        >
+          Login
+        </button>
       </form>
     </div>
   );

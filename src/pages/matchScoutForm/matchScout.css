@@ -1,0 +1,77 @@
+.matchScout {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+.scout-section {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #333;
+}
+
+.scout-section h2 {
+  color: #ffffff;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #333;
+}
+
+.scout-section h3 {
+  color: #cccccc;
+  margin-bottom: 12px;
+}
+
+.scoring-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.scoring-subsection {
+  background: #242424;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  border: 1px solid #333;
+}
+
+.climb-section {
+  background: #242424;
+  padding: 16px;
+  border-radius: 6px;
+  margin-top: 16px;
+  border: 1px solid #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .scoring-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .matchScout {
+    padding: 8px;
+  }
+}
+
+/* Add any additional styles that were in ts.css */
+form {
+  margin-bottom: 60px;
+}
+
+.textInput {
+  margin: 10px;
+  padding: 5px;
+}
+
+.textBox {
+  width: 100%;
+  height: 100px;
+  margin: 10px;
+  padding: 5px;
+} 
