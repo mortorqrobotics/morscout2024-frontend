@@ -46,13 +46,13 @@ const DEFAULT_STATE = {
 
 
   // Climb
-  climbLevel: "-",
-  climbSuccess: "-",
-  climbAttemptTime: "-",
+  climbLevel: "None",
+  climbSuccess: "No",
+  climbAttemptTime: "None",
   climbComments: "",
   
   // General
-  robotSpeed: "-",
+  robotSpeed: "None",
   defenseRating: "-",
   generalComments: "",
 };
@@ -175,6 +175,13 @@ const MatchScoutForm = ({ username }) => {
       ...prevState,
       [name]: value,
       [`${phase}${level}Attempts`]: Math.max(value, prevState[`${phase}${level}Attempts`])
+    }));
+  };
+
+  const handleSingleOptionSelect = (field, option, value) => {
+    setFormState(prevState => ({
+      ...prevState,
+      [field]: value ? option : "None"
     }));
   };
 
@@ -352,42 +359,94 @@ const MatchScoutForm = ({ username }) => {
         <div className="scout-section">
           <h2>Climb</h2>
           <div className="climb-section">
-            <Dropdown
-              label="Climb Level Attempted"
-              options={["-","Deep", "Shallow"]}
-              onSelect={(value) => setFormState({ ...formState, climbLevel: value })}
-              defaultOption={formState.climbLevel}
-            />
-            <Dropdown
-              label="Successful Climb?"
-              options={CHOICEYESNOBLANK}
-              onSelect={(value) => setFormState({ ...formState, climbSuccess: value })}
-              defaultOption={formState.climbSuccess}
-            />
-            <Dropdown
-              label="When did they attempt to climb?"
-              options={["-", "Early (>30s)", "Mid (15-30s)", "Late (<15s)"]}
-              onSelect={(value) => setFormState({ ...formState, climbAttemptTime: value })}
-              defaultOption={formState.climbAttemptTime}
-            />
-            <TextBox
-              label="Climb Comments"
-              name="climbComments"
-              value={formState.climbComments}
-              onChange={(e) => setFormState({ ...formState, climbComments: e.target.value })}
-            />
+            <div className="climb-options">
+              <div className="checkbox-group">
+                <h3>Climb Level Attempted</h3>
+                <div className="checkbox-row">
+                  <Checkbox
+                    label="Deep"
+                    checked={formState.climbLevel === "Deep"}
+                    onChange={(checked) => handleSingleOptionSelect('climbLevel', "Deep", checked)}
+                  />
+                  <Checkbox
+                    label="Shallow"
+                    checked={formState.climbLevel === "Shallow"}
+                    onChange={(checked) => handleSingleOptionSelect('climbLevel', "Shallow", checked)}
+                  />
+                </div>
+              </div>
+
+              <div className="checkbox-group">
+                <h3>Climb Success</h3>
+                <div className="checkbox-row">
+                  <Checkbox
+                    label="Successful Climb?"
+                    checked={formState.climbSuccess === "Yes"}
+                    onChange={(checked) => 
+                      setFormState(prevState => ({
+                        ...prevState,
+                        climbSuccess: checked ? "Yes" : "No"
+                      }))
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="checkbox-group">
+                <h3>Climb Attempt Timing</h3>
+                <div className="checkbox-row">
+                  <Checkbox
+                    label="Early (>30s)"
+                    checked={formState.climbAttemptTime === "Early (>30s)"}
+                    onChange={(checked) => handleSingleOptionSelect('climbAttemptTime', "Early (>30s)", checked)}
+                  />
+                  <Checkbox
+                    label="Mid (15-30s)"
+                    checked={formState.climbAttemptTime === "Mid (15-30s)"}
+                    onChange={(checked) => handleSingleOptionSelect('climbAttemptTime', "Mid (15-30s)", checked)}
+                  />
+                  <Checkbox
+                    label="Late (<15s)"
+                    checked={formState.climbAttemptTime === "Late (<15s)"}
+                    onChange={(checked) => handleSingleOptionSelect('climbAttemptTime', "Late (<15s)", checked)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="comments-section">
+              <TextBox
+                label="Climb Comments"
+                name="climbComments"
+                value={formState.climbComments}
+                onChange={(e) => setFormState({ ...formState, climbComments: e.target.value })}
+                placeholder="Add any additional comments about the climb..."
+              />
+            </div>
           </div>
         </div>
 
         {/* Robot Performance Section */}
         <div className="scout-section">
           <h2>Robot Performance</h2>
-          <Dropdown
-            label="Robot Speed"
-            options={["-", "Slow", "Medium", "Fast"]}
-            onSelect={(value) => setFormState({ ...formState, robotSpeed: value })}
-            defaultOption={formState.robotSpeed}
-          />
+          <div className="checkbox-group">
+            <h3>Robot Speed</h3>
+            <Checkbox
+              label="Slow"
+              checked={formState.robotSpeed === "Slow"}
+              onChange={(checked) => handleSingleOptionSelect('robotSpeed', "Slow", checked)}
+            />
+            <Checkbox
+              label="Medium"
+              checked={formState.robotSpeed === "Medium"}
+              onChange={(checked) => handleSingleOptionSelect('robotSpeed', "Medium", checked)}
+            />
+            <Checkbox
+              label="Fast"
+              checked={formState.robotSpeed === "Fast"}
+              onChange={(checked) => handleSingleOptionSelect('robotSpeed', "Fast", checked)}
+            />
+          </div>
           <Dropdown
             label="Defense Rating"
             options={["-", "No Defense", "1", "2", "3", "4", "5"]}

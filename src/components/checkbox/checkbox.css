@@ -1,18 +1,61 @@
 .checkbox-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
   user-select: none;
+  padding: 4px;
 }
 
 .checkbox-container input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
   width: 20px;
   height: 20px;
+  border: 2px solid #666;
+  border-radius: 4px;
   cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  background: white;
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+  background: #007AFF;
+  border-color: #007AFF;
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-container input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3);
 }
 
 .checkbox-label {
-  color: var(--text-primary);
-  font-size: 16px;
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* For dark mode support */
+@media (prefers-color-scheme: dark) {
+  .checkbox-container input[type="checkbox"] {
+    border-color: #666;
+    background: #1c1c1e;
+  }
+
+  .checkbox-label {
+    color: #e5e5e7;
+  }
 } 
