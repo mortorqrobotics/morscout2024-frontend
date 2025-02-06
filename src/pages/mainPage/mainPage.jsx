@@ -84,7 +84,7 @@ const MainPage = ({ username }) => {
         </div>
       </div>
 
-      <div className="action-cards">
+     {/* <div className="action-cards">
         <button 
           className="action-card" 
           onClick={() => navigate('/pit-team-choice')}
@@ -114,7 +114,7 @@ const MainPage = ({ username }) => {
           <h3>Rankings</h3>
           <p>View team rankings and stats</p>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
