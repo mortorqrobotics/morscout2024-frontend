@@ -110,6 +110,10 @@
   letter-spacing: -0.5px;
 }
 
+.team-button:disabled {
+  background-color: rgb(114, 114, 114);
+}
+
 .red .team-number {
   color: #ff3b30;
 }
