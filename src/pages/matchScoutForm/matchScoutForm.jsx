@@ -53,7 +53,7 @@ const DEFAULT_STATE = {
   
   // General
   robotSpeed: "None",
-  defenseRating: "-",
+    // defenseRating: "-",
   generalComments: "",
 };
 
@@ -100,7 +100,7 @@ const orderFormData = (data) => {
     
     // General
     robotSpeed: data.robotSpeed,
-    defenseRating: data.defenseRating,
+    // defenseRating: data.defenseRating,
     generalComments: data.generalComments,
   };
 
@@ -447,12 +447,12 @@ const MatchScoutForm = ({ username }) => {
               onChange={(checked) => handleSingleOptionSelect('robotSpeed', "Fast", checked)}
             />
           </div>
-          <Dropdown
+          {/* <Dropdown
             label="Defense Rating"
             options={["-", "No Defense", "1", "2", "3", "4", "5"]}
             onSelect={(value) => setFormState({ ...formState, defenseRating: value })}
             defaultOption={formState.defenseRating}
-          />
+          /> */}
           <TextBox
             label="General Comments"
             name="generalComments"

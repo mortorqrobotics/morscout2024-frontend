@@ -58,45 +58,58 @@
 .rankings-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  background: var(--surface);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .rankings-table th {
-  background: #f8f8f8;
-  padding: 16px;
-  font-weight: 600;
-  color: #333;
-  border-bottom: 1px solid #eee;
   cursor: pointer;
   user-select: none;
-  position: relative;
+  padding: 12px;
+  background: #1a1a1a;
+  color: #FF5F00;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid #333;
+  transition: background-color 0.2s ease;
 }
 
 .rankings-table th:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #2a2a2a;
 }
 
 .rankings-table td {
-  padding: 16px;
-  border-bottom: 1px solid #eee;
-  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #333;
 }
 
-.rankings-table td:not(.team-cell) {
-  white-space: nowrap;
+.rankings-table tr:hover {
+  background-color: rgba(255, 95, 0, 0.1);
 }
 
-.ranking-row {
-  transition: background-color 0.2s;
-}
-
-.ranking-row:hover {
-  background-color: #f8f8f8;
+.rankings-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .rank-cell {
   font-weight: 600;
-  color: #007AFF;
+  color: #FF5F00;
+}
+
+.sort-indicator {
+  margin-left: 5px;
+  color: #FF5F00;
+}
+
+/* Add zebra striping for better readability */
+.rankings-table tbody tr:nth-child(odd) {
+  background-color: rgba(26, 26, 26, 0.4);
+}
+
+.rankings-table tbody tr:nth-child(even) {
+  background-color: rgba(26, 26, 26, 0.2);
 }
 
 .team-cell {
