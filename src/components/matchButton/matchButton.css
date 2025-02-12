@@ -77,17 +77,19 @@
 }
 
 .team-button {
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  padding: 10px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  transition: all 0.2s ease;
-  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
   width: 100%;
-  -webkit-tap-highlight-color: transparent;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .team-button.red {
@@ -181,4 +183,24 @@
   border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-md);
   text-align: center;
+}
+
+.team-button.loading {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.button-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

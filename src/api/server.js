@@ -30,17 +30,22 @@ export const submitMatchScout = async (teamNumber, data) => {
 };
 
 
-export const toggleMatchButtonStatus = async (teamNumber, matchNumber) => {
+export const toggleMatchButtonStatus = async (teamNumber, matchNumber, username) => {
   try {
     const response = await fetch(`${BACKEND_URL}/api/matchscout/${teamNumber}/${matchNumber}/button`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      body: JSON.stringify({ username })
     });
-    return response;
+    const data = await response.json();
+    return {
+      status: response.status,
+      data: data
+    };
   } catch (error) {
-    console.error("Error toggling match button status:", error);
+    console.error("Error toggling button status:", error);
     throw error;
   }
 };
@@ -48,9 +53,13 @@ export const toggleMatchButtonStatus = async (teamNumber, matchNumber) => {
 export const getMatchButtonStatus = async (teamNumber, matchNumber) => {
   try {
     const response = await fetch(`${BACKEND_URL}/api/matchscout/${teamNumber}/${matchNumber}/button`);
-    return response;
+    const data = await response.json();
+    return {
+      status: response.status,
+      data: data
+    };
   } catch (error) {
-    console.error("Error toggling match button status:", error);
+    console.error("Error getting button status:", error);
     throw error;
   }
 };

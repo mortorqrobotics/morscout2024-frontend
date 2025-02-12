@@ -65,11 +65,11 @@ function App() {
           </Layout>
         } />
         
-        <Route path="/userpage" element={
+        {/* <Route path="/userpage" element={
           <Layout>
             <UserPage />
           </Layout>
-        } />
+        } /> */}
         
         <Route path="/pit-team-choice" element={
           <Layout>
@@ -85,7 +85,7 @@ function App() {
         
         <Route path="/matchscout-team-choice" element={
           <Layout>
-            <MatchscoutPage />
+            <MatchscoutPage username={username} />
           </Layout>
         } />
         

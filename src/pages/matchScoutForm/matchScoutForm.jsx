@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../../components/header/header";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
-import { submitMatchScout } from "../../api/server";
+import { submitMatchScout, toggleMatchButtonStatus } from "../../api/server";
 import Counter from "../../components/counter/counter";
 import Dropdown from "../../components/dropdown/dropdown";
 import TextBox from "../../components/textBox/textBox";
@@ -141,18 +141,15 @@ const MatchScoutForm = ({ username }) => {
     }
 
     try {
-      // Order the form data before submission
-      const orderedFormData = orderFormData({
+      const response = await submitMatchScout(teamNumber, {
         ...formState,
+        username,
         matchNumber,
       });
       
-      const response = await submitMatchScout(teamNumber, {
-        ...orderedFormData,
-        username,
-      });
-      
       if (response.ok) {
+        // Reset button status after successful form submission
+        await toggleMatchButtonStatus(teamNumber, matchNumber, username);
         toast.success("Match Scout form submitted successfully");
         setFormState({ ...DEFAULT_STATE });
         navigate("/");
