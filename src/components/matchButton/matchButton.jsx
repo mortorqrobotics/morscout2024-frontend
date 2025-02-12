@@ -4,9 +4,34 @@ import { getMatchButtonStatus, toggleMatchButtonStatus } from "../../api/server"
 import { useEffect, useState, useCallback } from "react";
 import { toast } from "react-hot-toast";
 
-const Button = ({ teamNumber, matchNumber, className, username, status, scoutedBy, onButtonClick }) => {
+const Button = ({ teamNumber, matchNumber, className, username, onButtonClick }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState("available");
+  const [scoutedBy, setScoutedBy] = useState(null);
   const navigate = useNavigate();
+
+  // Check status periodically
+  useEffect(() => {
+    const checkStatus = async () => {
+      try {
+        const response = await getMatchButtonStatus(teamNumber, matchNumber);
+        if (response.status === 200) {
+          setStatus(response.data.status);
+          setScoutedBy(response.data.scoutedBy);
+        }
+      } catch (error) {
+        console.error('Status check error:', error);
+      }
+    };
+
+    // Initial check
+    checkStatus();
+
+    // Set up periodic checks every 5 seconds
+    const interval = setInterval(checkStatus, 5000);
+
+    return () => clearInterval(interval);
+  }, [teamNumber, matchNumber]);
 
   const handleTeamButtonClick = async () => {
     if (!username) {
@@ -16,14 +41,22 @@ const Button = ({ teamNumber, matchNumber, className, username, status, scoutedB
     
     setIsLoading(true);
     try {
-      const response = await toggleMatchButtonStatus(teamNumber, matchNumber, username);
+      const response = await getMatchButtonStatus(teamNumber, matchNumber);
       if (response.status === 200) {
-        onButtonClick(teamNumber, response.data.status, response.data.scoutedBy);
         if (response.data.status === "working") {
-          navigate(`/matchscout-team-form/${teamNumber}/${matchNumber}`);
+          toast.error("This team is already being scouted");
+          return;
         }
-      } else {
-        toast.error(response.data.error || "Failed to update status");
+        
+        const toggleResponse = await toggleMatchButtonStatus(teamNumber, matchNumber, username);
+        if (toggleResponse.status === 200) {
+          setStatus(toggleResponse.data.status);
+          setScoutedBy(toggleResponse.data.scoutedBy);
+          onButtonClick(teamNumber, toggleResponse.data.status, toggleResponse.data.scoutedBy);
+          if (toggleResponse.data.status === "working") {
+            navigate(`/matchscout-team-form/${teamNumber}/${matchNumber}`);
+          }
+        }
       }
     } catch (error) {
       console.error('Toggle error:', error);
@@ -59,39 +92,6 @@ const Button = ({ teamNumber, matchNumber, className, username, status, scoutedB
 };
 
 const MatchButton = ({ teamNums, matchNum, username }) => {
-  const [buttonStatuses, setButtonStatuses] = useState({});
-  const [lastFetchTime, setLastFetchTime] = useState(null);
-
-  const fetchMatchStatuses = useCallback(async () => {
-    // Only fetch if it's been more than 30 seconds since last fetch
-    if (lastFetchTime && Date.now() - lastFetchTime < 30000) {
-      return;
-    }
-
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/matchscout/match/${matchNum}/status`);
-      const data = await response.json();
-      
-      if (data.success) {
-        setButtonStatuses(data.statuses);
-        setLastFetchTime(Date.now());
-      }
-    } catch (error) {
-      console.error("Error fetching match statuses:", error);
-    }
-  }, [matchNum, lastFetchTime]);
-
-  useEffect(() => {
-    fetchMatchStatuses();
-  }, [fetchMatchStatuses]);
-
-  const handleButtonUpdate = (teamNumber, status, scoutedBy) => {
-    setButtonStatuses(prev => ({
-      ...prev,
-      [teamNumber]: { status, scoutedBy }
-    }));
-  };
-
   return (
     <div className="match-card">
       <div className="alliance-row red-alliance">
@@ -102,9 +102,7 @@ const MatchButton = ({ teamNums, matchNum, username }) => {
             matchNumber={matchNum} 
             className="red" 
             username={username}
-            status={buttonStatuses[num]?.status || "available"}
-            scoutedBy={buttonStatuses[num]?.scoutedBy}
-            onButtonClick={handleButtonUpdate}
+            onButtonClick={() => {}}
           />
         ))}
       </div>
@@ -121,9 +119,7 @@ const MatchButton = ({ teamNums, matchNum, username }) => {
             matchNumber={matchNum} 
             className="blue" 
             username={username}
-            status={buttonStatuses[num]?.status || "available"}
-            scoutedBy={buttonStatuses[num]?.scoutedBy}
-            onButtonClick={handleButtonUpdate}
+            onButtonClick={() => {}}
           />
         ))}
       </div>
