@@ -6,7 +6,7 @@ import { getEventMatches } from "../../api/tba";
 import SearchBar from "../../components/searchbar/searchbar";
 import { useNavigate } from "react-router-dom";
 
-const MatchscoutPage = () => {
+const MatchscoutPage = ({ username }) => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -71,6 +71,7 @@ const MatchscoutPage = () => {
                     ...match.blue_team.map((team) => team.substring(3)),
                   ]}
                   matchNum={match.matchNum}
+                  username={username}
                 />
               </div>
             ))}

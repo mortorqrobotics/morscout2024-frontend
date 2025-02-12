@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import '../styles/Layout.css';
 // Simple SVG icons
 const Icons = {
   Home: () => (
@@ -52,7 +52,6 @@ const Layout = ({ children }) => {
     { path: '/pit-team-choice', icon: Icons.Clipboard, label: 'Pit Scout' },
     { path: '/matchscout-team-choice', icon: Icons.List, label: 'Match Scout' },
     { path: '/rankings', icon: Icons.Trophy, label: 'Rankings' },
-    { path: '/userpage', icon: Icons.User, label: 'Profile' }
   ];
 
   return (
