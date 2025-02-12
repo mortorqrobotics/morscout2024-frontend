@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import '../styles/Layout.css';
 // Simple SVG icons
 const Icons = {
   Home: () => (
