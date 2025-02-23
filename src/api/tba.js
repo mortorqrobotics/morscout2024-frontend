@@ -44,8 +44,6 @@ export const getEventMatches = async () => {
     }
   }
 
-const TBA_URL = import.meta.env.VITE_TBA_URL || "http://localhost:8000";
-
 export const getRankings = async () => {
   try {
     const { data } = await axios.get(

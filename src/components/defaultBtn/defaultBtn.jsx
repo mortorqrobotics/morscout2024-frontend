@@ -1,9 +1,8 @@
-import React from 'react'
 import "./defaultBtn.css"
 const DefaultBtn = (props) => {
   return (
     <div >
-        <button className='defaultBtn' style={{
+        <button className='default-btn' style={{
           backgroundColor: props.backgroundColor
         }}>
           {props.text}

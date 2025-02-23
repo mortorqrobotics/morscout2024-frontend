@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import "./searchbar.css"
 
 const SearchBar = ({ onSearch, searchText}) => {
@@ -6,7 +6,7 @@ const SearchBar = ({ onSearch, searchText}) => {
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
-    onSearch(event.target.value); // Call onSearch prop with the updated search term
+    onSearch(event.target.value); 
   };
 
   return (

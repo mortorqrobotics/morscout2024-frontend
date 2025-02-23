@@ -20,10 +20,6 @@
   max-width: 300px;
 }
 
-.dropdown * {
-  box-sizing: border-box;
-}
-
 .select {
   background-color: #1a1a1a;
   color: white;
@@ -107,7 +103,7 @@
 }
 
 .active {
-  background: rgba(255, 95, 0, 0.1) !important;
+  background: rgba(255, 95, 0, 0.1);
   color: #FF5F00;
 }
 

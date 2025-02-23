@@ -2,12 +2,6 @@
   padding: var(--spacing-md);
 }
 
-.Matches {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
 .matchAndHeading {
   border: 1px solid var(--surface-light);
   border-radius: var(--radius-lg);

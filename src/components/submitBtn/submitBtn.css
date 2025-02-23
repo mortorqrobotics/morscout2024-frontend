@@ -1,4 +1,4 @@
-.submitBtn {
+.submit-btn-content {
     background: linear-gradient(135deg, #FF5F00 0%, #ff7f33 100%);
     color: white;
     border: none;
@@ -19,18 +19,18 @@
     overflow: hidden;
 }
 
-.submitBtn:hover {
+.submit-btn-content:hover {
     background: linear-gradient(135deg, #ff7f33 0%, #FF5F00 100%);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 95, 0, 0.4);
 }
 
-.submitBtn:active {
+.submit-btn-content:active {
     transform: translateY(1px);
     box-shadow: 0 2px 10px rgba(255, 95, 0, 0.3);
 }
 
-.submitBtn:disabled {
+.submit-btn-content:disabled {
     background: #666;
     cursor: not-allowed;
     transform: none;
@@ -39,7 +39,7 @@
 }
 
 /* Add ripple effect */
-.submitBtn::after {
+.submit-btn-content::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -52,7 +52,7 @@
     transition: width 0.3s ease-out, height 0.3s ease-out;
 }
 
-.submitBtn:active::after {
+.submit-btn-content:active::after {
     width: 300px;
     height: 300px;
 }
@@ -67,17 +67,17 @@
 }
 
 /* Loading state */
-.submitBtn.loading {
+.submit-btn-content.loading {
     cursor: wait;
     opacity: 0.8;
 }
 
 /* Success state */
-.submitBtn.success {
+.submit-btn-content.success {
     background: linear-gradient(135deg, #28a745 0%, #34ce57 100%);
 }
 
 /* Error state */
-.submitBtn.error {
+.submit-btn-content.error {
     background: linear-gradient(135deg, #dc3545 0%, #ff4d5a 100%);
 }

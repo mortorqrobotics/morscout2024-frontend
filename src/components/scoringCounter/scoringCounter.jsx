@@ -1,4 +1,3 @@
-import React from "react";
 import "./scoringCounter.css";
 
 const ScoringCounter = ({

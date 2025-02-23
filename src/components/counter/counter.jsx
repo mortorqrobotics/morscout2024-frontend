@@ -1,4 +1,3 @@
-import React from "react";
 import "./counter.css"
 
 const Counter = ({ label, name, value, onChange }) => {
@@ -11,12 +10,12 @@ const Counter = ({ label, name, value, onChange }) => {
   };
 
   return (
-    <div className="counterFull">
+    <div className="counter-full">
       <label>{label}</label>
       <div className="counters">
         <button type="button" onClick={handleDecrement}>-</button>
         <span className="value">{value}</span>
-        <button type="button" className="counterButton" onClick={handleIncrement}>+</button>
+        <button type="button" className="counter-button" onClick={handleIncrement}>+</button>
       </div>
     </div>
   );

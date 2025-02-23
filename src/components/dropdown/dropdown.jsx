@@ -1,5 +1,4 @@
-// Dropdown.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./dropdown.css";
 
 const Dropdown = ({ label, options, onSelect, defaultOption }) => {

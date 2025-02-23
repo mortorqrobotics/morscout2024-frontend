@@ -1,4 +1,4 @@
-.pitButton{
+.pit-button{
     width: 385px;
     height: 65px;
     text-align: center;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 400px) {
-    .pitButton{
+    .pit-button{
         width: 285px;
         height: 65px;
         text-align: center;
