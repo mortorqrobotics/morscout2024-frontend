@@ -148,8 +148,6 @@ const MatchScoutForm = ({ username }) => {
       });
       
       if (response.ok) {
-        // Reset button status after successful form submission
-        await toggleMatchButtonStatus(teamNumber, matchNumber, username);
         toast.success("Match Scout form submitted successfully");
         setFormState({ ...DEFAULT_STATE });
         navigate("/");
@@ -224,7 +222,7 @@ const MatchScoutForm = ({ username }) => {
           <div className="scoring-subsection">
             <h3>Algae Scoring</h3>
             <div className="counter-group">
-              <div className="counter-label">Processor</div>
+              <div className="scoring-label">Processor</div>
               <ScoringCounter
                 scoredValue={formState.autoProcessorAlgaeScores}
                 attemptedValue={formState.autoProcessorAlgaeAttempts}
@@ -244,7 +242,7 @@ const MatchScoutForm = ({ username }) => {
               />
             </div>
             <div className="counter-group">
-              <div className="counter-label">Net</div>
+              <div className="scoring-label">Net</div>
               <ScoringCounter
                 scoredValue={formState.autoNetAlgaeScores}
                 attemptedValue={formState.autoNetAlgaeAttempts}
@@ -310,7 +308,7 @@ const MatchScoutForm = ({ username }) => {
           <div className="scoring-subsection">
             <h3>Algae Scoring</h3>
             <div className="counter-group">
-              <div className="counter-label">Processor</div>
+              <div className="scoring-label">Processor</div>
               <ScoringCounter
                 scoredValue={formState.teleopProcessorAlgaeScores}
                 attemptedValue={formState.teleopProcessorAlgaeAttempts}
@@ -330,7 +328,7 @@ const MatchScoutForm = ({ username }) => {
               />
             </div>
             <div className="counter-group">
-              <div className="counter-label">Net</div>
+              <div className="scoring-label">Net</div>
               <ScoringCounter
                 scoredValue={formState.teleopNetAlgaeScores}
                 attemptedValue={formState.teleopNetAlgaeAttempts}

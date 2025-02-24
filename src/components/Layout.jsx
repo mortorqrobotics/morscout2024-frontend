@@ -1,4 +1,7 @@
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import './Layout.css';
+
 // Simple SVG icons
 const Icons = {
   Home: () => (
@@ -54,11 +57,10 @@ const Layout = ({ children }) => {
   ];
 
   return (
-    <div className="app-container">
-      <div className="page-content">
+    <div className="layout">
+      <div className="page-container">
         {children}
       </div>
-
       <nav className="navbar">
         <div className="nav-content">
           {navItems.map(({ path, icon: Icon, label }) => (
