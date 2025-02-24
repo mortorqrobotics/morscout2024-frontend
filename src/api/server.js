@@ -2,7 +2,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 export const submitPitscout = async (teamNumber, data) => {
     return await fetch(
-        `${BACKEND_URL}/submit-pitscout/${teamNumber}`,
+        `${BACKEND_URL}/api/submit-pitscout/${teamNumber}`,
         {
             method: "POST",
             headers: {
@@ -65,13 +65,4 @@ export const getMatchButtonStatus = async (teamNumber, matchNumber) => {
 };
 
 
-export const getScoutData = async (scoutType) => {
-  try {
-    const response = await fetch(`${BACKEND_URL}/${scoutType}`);
-    return response;
-  } catch (error) {
-    console.error("Error fetching scout data:", error);
-    throw error;
-  }
-};
 
