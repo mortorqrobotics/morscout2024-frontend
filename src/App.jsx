@@ -5,8 +5,8 @@ import MainPage from "./pages/mainPage/mainPage";
 import AdminPage from "./pages/adminPage/adminPage";
 import Pitscoutpage from "./pages/pitScoutTeamSelectPage/pitScoutTeamSelectPage";
 import MatchscoutPage from "./pages/matchScoutPage/matchscoutPage";
-import PitScoutForm from "./pages/pitScoutForm/pitScoutForm";
-import MatchScoutForm from "./pages/matchScoutForm/matchScoutForm";
+import PitScoutForm from "./forms/pitScoutForm/pitScoutForm"
+import MatchScoutForm from "./forms/matchScoutForm/matchScoutForm";
 import LoginPage from "./pages/loginPage/loginPage";
 import Rankings from "./pages/rankings/rankings";
 import "./styles/global.css";

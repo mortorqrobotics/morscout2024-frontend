@@ -1,0 +1,29 @@
+{
+  "teams": [
+    {
+      "teamNumber": "1678",
+      "teamName": "Citrus Circuits",
+      "location": "Davis, CA"
+    },
+    {
+      "teamNumber": "254",
+      "teamName": "The Cheesy Poofs",
+      "location": "San Jose, CA"
+    },
+    {
+      "teamNumber": "971",
+      "teamName": "Spartan Robotics",
+      "location": "Mountain View, CA"
+    },
+    {
+      "teamNumber": "118",
+      "teamName": "Robonauts",
+      "location": "Houston, TX"
+    },
+    {
+      "teamNumber": "148",
+      "teamName": "Robowranglers",
+      "location": "Greenville, TX"
+    }
+  ]
+} 

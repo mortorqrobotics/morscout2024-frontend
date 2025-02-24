@@ -8,74 +8,89 @@ import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
 
-const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
-const SCORINGPOSITIONS = ["-", "Amp", "Speaker", "Both"]; // Blank added for default
+// Constants for dropdown options
+const CHOICEYESNO = ["-", "Yes", "No"]; // Simple yes/no choices with blank default
+const SCORINGPOSITIONS = ["-", "Amp", "Speaker", "Both"]; // Scoring position options for 2024 game
 
+// Default state for the form - all fields start empty
 const DEFAULT_STATE = {
-  robotWeight: "",
-  frameSize: "",
-  drivetrain: "",
-  auto: "",
-  scoringPositionAuto: "",
-  autoNotesScored: "",
-  scoringPosition: "",
-  estimatedCycleTime: "",
-  pickupFromFloor: "",
-  climb: "",
-  trap: "",
-  buddyClimb: "", // New field added for buddy climb
-  climbTime: "", // New field added for climb time
-  shootFrom: "", // New field added for where the robot can shoot from
-  additionalComments: "", // New field added for additional comments
+  robotWeight: "",           // Weight of the robot in pounds
+  frameSize: "",            // Physical dimensions of the robot frame
+  drivetrain: "",           // Type of drive system (swerve, tank, etc.)
+  auto: "",                 // Whether robot has autonomous capabilities
+  scoringPositionAuto: "",  // Where robot can score during autonomous
+  autoNotesScored: "",      // Details about autonomous scoring sequences
+  scoringPosition: "",      // Where robot can score during teleop
+  estimatedCycleTime: "",   // Time to complete one scoring cycle
+  pickupFromFloor: "",      // Where robot can pickup game pieces
+  climb: "",               // Whether robot can climb
+  trap: "",                // Whether robot can score in trap
+  buddyClimb: "",          // Whether robot can assist others in climbing
+  climbTime: "",           // Time needed to complete a climb
+  shootFrom: "",           // Positions robot can shoot from
+  additionalComments: "",   // Any other relevant information
 };
 
 const PitScoutForm = ({ username }) => {
+  // Get teamNumber from URL parameters
   const { teamNumber } = useParams();
   const navigate = useNavigate();
 
+  // Main form state - combines default state with team number
   const [formState, setFormState] = useState({ ...DEFAULT_STATE, teamNumber });
+  // Track whether form is currently being submitted
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  // Handle changes in text input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormState((prevState) => ({ ...prevState, [name]: value }));
+    setFormState(prevState => ({ ...prevState, [name]: value }));
   };
 
+  // Handle changes in dropdown selections
   const handleDropdownSelect = (selectedValue, name) => {
-    setFormState((prevState) => ({
+    setFormState(prevState => ({
       ...prevState,
       [name]: selectedValue,
     }));
   };
 
+  // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setFormSubmitted(true); // Disable submit button while processing
 
-    // Exclude additionalComments field if it's empty
+    // Check if required fields are filled
+    // Note: additionalComments is optional, so it's excluded from validation
     const isFormIncomplete = Object.entries(formState)
       .filter(([key, value]) => key !== "additionalComments" || value !== "")
       .some(([key, value]) => value === "");
 
+    // Show error if required fields are empty
     if (isFormIncomplete) {
       toast.error("Form is not filled out completely");
       return;
     }
 
     try {
+      // Submit form data to server
       const response = await submitPitscout(teamNumber, {
         ...formState,
-        username,
+        username, // Include username with submission
       });
+
       if (response.ok) {
+        // On success: show message, reset form, and navigate home
         toast.success("Pit form submitted successfully");
         setFormState({ ...DEFAULT_STATE, teamNumber });
         navigate("/");
       } else {
+        // On API error: show error and re-enable submit button
         toast.error("Pit form submission failed");
         setFormSubmitted(false);
       }
     } catch (error) {
+      // On network/server error: show error and re-enable submit button
       toast.error("Internal Server Error");
       setFormSubmitted(false);
       console.log(error);

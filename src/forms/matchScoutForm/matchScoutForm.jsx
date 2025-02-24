@@ -55,55 +55,55 @@ const DEFAULT_STATE = {
   generalComments: "",
 };
 
-// const orderFormData = (data) => {
-//   // Create ordered sections based on DEFAULT_STATE structure
-//   const orderedData = {
-//     // Match Info
-//     matchNumber: data.matchNumber,
+const orderFormData = (data) => {
+  // Create ordered sections based on DEFAULT_STATE structure
+  const orderedData = {
+    // Match Info
+    matchNumber: data.matchNumber,
     
-//     // Auto
-//     autoL1Scores: data.autoL1Scores,
-//     autoL2Scores: data.autoL2Scores,
-//     autoL3Scores: data.autoL3Scores,
-//     autoL4Scores: data.autoL4Scores,
-//     autoL1Attempts: data.autoL1Attempts,
-//     autoL2Attempts: data.autoL2Attempts,
-//     autoL3Attempts: data.autoL3Attempts,
-//     autoL4Attempts: data.autoL4Attempts,
-//     autoProcessorAlgaeScores: data.autoProcessorAlgaeScores,
-//     autoProcessorAlgaeAttempts: data.autoProcessorAlgaeAttempts,
-//     autoNetAlgaeScores: data.autoNetAlgaeScores,
-//     autoNetAlgaeAttempts: data.autoNetAlgaeAttempts,
-//     leftStartingZone: data.leftStartingZone,
+    // Auto
+    autoL1Scores: data.autoL1Scores,
+    autoL2Scores: data.autoL2Scores,
+    autoL3Scores: data.autoL3Scores,
+    autoL4Scores: data.autoL4Scores,
+    autoL1Attempts: data.autoL1Attempts,
+    autoL2Attempts: data.autoL2Attempts,
+    autoL3Attempts: data.autoL3Attempts,
+    autoL4Attempts: data.autoL4Attempts,
+    autoProcessorAlgaeScores: data.autoProcessorAlgaeScores,
+    autoProcessorAlgaeAttempts: data.autoProcessorAlgaeAttempts,
+    autoNetAlgaeScores: data.autoNetAlgaeScores,
+    autoNetAlgaeAttempts: data.autoNetAlgaeAttempts,
+    leftStartingZone: data.leftStartingZone,
     
-//     // Teleop
-//     teleopL1Scores: data.teleopL1Scores,
-//     teleopL2Scores: data.teleopL2Scores,
-//     teleopL3Scores: data.teleopL3Scores,
-//     teleopL4Scores: data.teleopL4Scores,
-//     teleopL1Attempts: data.teleopL1Attempts,
-//     teleopL2Attempts: data.teleopL2Attempts,
-//     teleopL3Attempts: data.teleopL3Attempts,
-//     teleopL4Attempts: data.teleopL4Attempts,
-//     teleopProcessorAlgaeScores: data.teleopProcessorAlgaeScores,
-//     teleopProcessorAlgaeAttempts: data.teleopProcessorAlgaeAttempts,
-//     teleopNetAlgaeScores: data.teleopNetAlgaeScores,
-//     teleopNetAlgaeAttempts: data.teleopNetAlgaeAttempts,
+    // Teleop
+    teleopL1Scores: data.teleopL1Scores,
+    teleopL2Scores: data.teleopL2Scores,
+    teleopL3Scores: data.teleopL3Scores,
+    teleopL4Scores: data.teleopL4Scores,
+    teleopL1Attempts: data.teleopL1Attempts,
+    teleopL2Attempts: data.teleopL2Attempts,
+    teleopL3Attempts: data.teleopL3Attempts,
+    teleopL4Attempts: data.teleopL4Attempts,
+    teleopProcessorAlgaeScores: data.teleopProcessorAlgaeScores,
+    teleopProcessorAlgaeAttempts: data.teleopProcessorAlgaeAttempts,
+    teleopNetAlgaeScores: data.teleopNetAlgaeScores,
+    teleopNetAlgaeAttempts: data.teleopNetAlgaeAttempts,
 
-//     // Climb
-//     climbLevel: data.climbLevel,
-//     climbSuccess: data.climbSuccess,
-//     climbAttemptTime: data.climbAttemptTime,
-//     climbComments: data.climbComments,
+    // Climb
+    climbLevel: data.climbLevel,
+    climbSuccess: data.climbSuccess,
+    climbAttemptTime: data.climbAttemptTime,
+    climbComments: data.climbComments,
     
-//     // General
-//     robotSpeed: data.robotSpeed,
-//     // defenseRating: data.defenseRating,
-//     generalComments: data.generalComments,
-//   };
+    // General
+    robotSpeed: data.robotSpeed,
+    // defenseRating: data.defenseRating,
+    generalComments: data.generalComments,
+  };
 
-//   return orderedData;
-// };
+  return orderedData;
+};
 
 const MatchScoutForm = ({ username }) => {
   const { teamNumber, matchNumber } = useParams();
