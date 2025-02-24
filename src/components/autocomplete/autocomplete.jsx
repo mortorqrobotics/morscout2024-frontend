@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Autocomplete.css';
+import { useState } from 'react';
+import "./autocomplete.css"
 
 const Autocomplete = ({ options, onSelect, placeholder }) => {
   const [inputValue, setInputValue] = useState('');

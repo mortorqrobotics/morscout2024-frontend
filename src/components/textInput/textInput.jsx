@@ -1,4 +1,3 @@
-// TextInput.jsx
 import "./textInput.css"
 
 const TextInput = ({ label, name, value, onChange }) => {

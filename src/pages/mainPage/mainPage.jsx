@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import "./mainPage.css";
 
+const currentMatch =  {
+  matchNumber: 'Qualification 24',
+  teams: [
+    { number: '1234', alliance: 'red' },
+    { number: '5678', alliance: 'red' },
+    { number: '9012', alliance: 'red' },
+    { number: '3456', alliance: 'blue' },
+    { number: '7890', alliance: 'blue' },
+    { number: '1357', alliance: 'blue' }
+  ]
+}
+
 const MainPage = ({ username }) => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     pitScouts: 0,

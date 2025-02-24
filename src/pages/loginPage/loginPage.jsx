@@ -1,8 +1,7 @@
-import { useState } from "react";
 import "./loginPage.css";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import Autocomplete from "../../components/Autocomplete";
+import Autocomplete from "../../components/autocomplete/autocomplete";
 import { teamMembers } from "../../data/teamMembers";
 
 const LoginPage = ({ changeUsername }) => {

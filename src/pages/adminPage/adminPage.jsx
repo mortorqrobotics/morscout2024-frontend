@@ -1,6 +1,6 @@
 import Header from "../../components/header/header";
-import { getScoutData } from "../../api/server"; // Adjust import path
-import { utils, writeFile } from "xlsx"; // Import specific functions from xlsx
+import { getScoutData } from "../../api/server"; 
+import { utils, writeFile } from "xlsx"; 
 import "./adminPage.css";
 
 const AdminPage = () => {

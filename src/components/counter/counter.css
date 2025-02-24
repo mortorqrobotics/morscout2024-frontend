@@ -1,9 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-
-.counterFull{
+.counter-full{
     margin: 30px 0px;
     display: flex;
     flex-direction: column;
@@ -24,6 +19,6 @@
     font-size: xx-large;
 }
 
-.counterButton{
+.counter-button{
     background-color: #ff5f00;
 }

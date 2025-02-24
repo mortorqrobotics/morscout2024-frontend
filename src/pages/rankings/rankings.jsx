@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Header from "../../components/header/header";
 import SearchBar from "../../components/searchbar/searchbar";
 import { getRankings, getTeamName } from "../../api/tba";

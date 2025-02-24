@@ -1,7 +1,6 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
-import Layout from "./components/Layout";
 import MainPage from "./pages/mainPage/mainPage";
 import AdminPage from "./pages/adminPage/adminPage";
 import Pitscoutpage from "./pages/pitScoutTeamSelectPage/pitScoutTeamSelectPage";
@@ -9,10 +8,10 @@ import MatchscoutPage from "./pages/matchScoutPage/matchscoutPage";
 import PitScoutForm from "./pages/pitScoutForm/pitScoutForm";
 import MatchScoutForm from "./pages/matchScoutForm/matchScoutForm";
 import LoginPage from "./pages/loginPage/loginPage";
-import UserPage from "./pages/userPage/userPage";
 import Rankings from "./pages/rankings/rankings";
 import "./styles/global.css";
 import "./styles/layout.css";
+import Layout from "./components/layout/layout";
 
 function App() {
   const [username, setUsername] = useState(localStorage.getItem("username"));
@@ -36,7 +35,7 @@ function App() {
         reverseOrder={false}
         toastOptions={{
           style: {
-            background: 'var(--surface)',
+            background: 'var(--background)',
             color: 'var(--text-primary)',
             border: '1px solid var(--surface-light)',
             borderRadius: 'var(--radius-md)',

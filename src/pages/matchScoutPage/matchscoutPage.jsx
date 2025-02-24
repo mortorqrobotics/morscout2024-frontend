@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import{ useState, useEffect } from "react";
 import "./matchScoutPage.css";
 import Header from "../../components/header/header";
 import MatchButton from "../../components/matchButton/matchButton";
 import { getEventMatches } from "../../api/tba";
 import SearchBar from "../../components/searchbar/searchbar";
-import { useNavigate } from "react-router-dom";
 
 const MatchscoutPage = ({ username }) => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
