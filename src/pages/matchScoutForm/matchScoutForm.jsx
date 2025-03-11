@@ -367,6 +367,11 @@ const MatchScoutForm = ({ username }) => {
                     checked={formState.climbLevel === "Shallow"}
                     onChange={(checked) => handleSingleOptionSelect('climbLevel', "Shallow", checked)}
                   />
+                  <Checkbox
+                    label="Parked"
+                    checked={formState.climbLevel === "Parked"}
+                    onChange={(checked) => handleSingleOptionSelect('climbLevel', "Parked", checked)}
+                  />
                 </div>
               </div>
 

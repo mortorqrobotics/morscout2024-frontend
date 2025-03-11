@@ -67,16 +67,7 @@ const Pitscoutpage = () => {
                 onClick={() => navigate(`/pit-team-form/${team.teamNumber}`)}
               >
                 <span className="team-number">#{team.teamNumber}</span>
-                <div className="team-stats">
-                  <span className="stat">
-                    <span className="stat-label">Match Scouts:</span>
-                    <span className="stat-value">0</span>
-                  </span>
-                  <span className="stat">
-                    <span className="stat-label">Pit Scouts:</span>
-                    <span className="stat-value">0</span>
-                  </span>
-                </div>
+              
               </button>
             ))}
           </div>

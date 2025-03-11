@@ -2,7 +2,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import MainPage from "./pages/mainPage/mainPage";
-import AdminPage from "./pages/adminPage/adminPage";
 import Pitscoutpage from "./pages/pitScoutTeamSelectPage/pitScoutTeamSelectPage";
 import MatchscoutPage from "./pages/matchScoutPage/matchscoutPage";
 import PitScoutForm from "./pages/pitScoutForm/pitScoutForm";
@@ -52,12 +51,7 @@ function App() {
           </Layout>
         } />
         
-        <Route path="/admin" element={
-          <Layout>
-            <AdminPage />
-          </Layout>
-        } />
-        
+
         <Route path="/rankings" element={
           <Layout>
             <Rankings />

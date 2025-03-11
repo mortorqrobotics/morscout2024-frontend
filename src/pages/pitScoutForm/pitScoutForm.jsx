@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
+import TextBox from "../../components/textBox/textBox";
 
 const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
 const SCORINGPOSITIONS = ["-", "Amp", "Speaker", "Both"]; // Blank added for default
@@ -137,7 +138,7 @@ const PitScoutForm = ({ username }) => {
           defaultOption={formState.scoringPositionAuto}
         />
 
-        <TextInput
+        <TextBox
           label="Possible auto sequences (how many can they score - list all please!)"
           name="autoNotesScored"
           value={formState.autoNotesScored}
@@ -151,12 +152,6 @@ const PitScoutForm = ({ username }) => {
           defaultOption={formState.scoringPosition}
         />
         <TextInput
-          label="Where can the robot shoot from? Ex: at the subwoofer, by the stage"
-          name="shootFrom"
-          value={formState.shootFrom}
-          onChange={handleChange}
-        />
-        <TextInput
           label="Estimated Cycle Time (human player station to shooting)? (s)"
           name="estimatedCycleTime"
           value={formState.estimatedCycleTime}
@@ -164,7 +159,7 @@ const PitScoutForm = ({ username }) => {
         />
 
         <TextInput
-          label="Where can note be picked up?"
+          label="Where can coral be picked up?"
           name="pickupFromFloor"
           value={formState.pickupFromFloor}
           onChange={handleChange}
@@ -182,20 +177,6 @@ const PitScoutForm = ({ username }) => {
           name="climbTime"
           value={formState.climbTime}
           onChange={handleChange}
-        />
-
-        <Dropdown
-          label="Can buddy climb?"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "buddyClimb")}
-          defaultOption={formState.buddyClimb}
-        />
-
-        <Dropdown
-          label="Can do trap?"
-          options={CHOICEYESNO}
-          onSelect={(value) => handleDropdownSelect(value, "trap")}
-          defaultOption={formState.trap}
         />
 
         <TextInput
