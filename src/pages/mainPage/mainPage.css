@@ -13,12 +13,16 @@
   margin-top: 20px;
 }
 .main-page {
-  height: 100%;
+  height: 95vh;
+  margin-top: 5vh;
   display: flex;
-  flex-direction: column;
-  padding: 12px;
-  box-sizing: border-box;
-  background: linear-gradient(135deg, #1a1a1a, #262626, #1f1f1f);
+  flex-direction: column; 
+  justify-content: center;
+  padding: 12px; 
+  background: #1a1a1a;
+  align-content: center;
+  align-items: flex-start;
+  overflow: hidden;
 }
 
 .page-header {
@@ -38,7 +42,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 12px;
   min-height: 0;
 }
@@ -61,7 +64,12 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
 }
 
 .stat-value {
@@ -89,7 +97,12 @@
   border: 1px solid rgba(255, 95, 0, 0.1);
   padding: 12px;
   border-radius: 12px;
-  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-2px);
 }
 
 .action-card h2 {
