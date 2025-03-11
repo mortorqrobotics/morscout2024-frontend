@@ -1,17 +1,8 @@
 import { useState, useEffect } from 'react';
 import "./mainPage.css";
+import { Link } from 'react-router-dom';
 
-const currentMatch =  {
-  matchNumber: 'Qualification 24',
-  teams: [
-    { number: '1234', alliance: 'red' },
-    { number: '5678', alliance: 'red' },
-    { number: '9012', alliance: 'red' },
-    { number: '3456', alliance: 'blue' },
-    { number: '7890', alliance: 'blue' },
-    { number: '1357', alliance: 'blue' }
-  ]
-}
+
 
 const MainPage = ({ username }) => {
   const [loading, setLoading] = useState(true);
@@ -74,18 +65,18 @@ const MainPage = ({ username }) => {
           </div>
 
           <div className="action-cards">
-            <div className="action-card" onClick={() => handleCardClick("/pit-team-choice")}>
+            <Link className="action-card" to={"/pit-team-choice"}>
               <h2>Pit Scouting</h2>
               <p>Start scouting robots up close.</p>
-            </div>
-            <div className="action-card" onClick={() => handleCardClick("/matchscout-team-choice")}>
+            </Link>
+            <Link className="action-card" to={"/matchscout-team-choice"}>
               <h2>Match Scouting</h2>
               <p>Scout matches in real-time.</p>
-            </div>
-            <div className="action-card" onClick={() => handleCardClick("/rankings")}>
+            </Link>
+            <Link className="action-card" to={"/rankings"}>
               <h2>Rankings</h2>
               <p>Check out the latest team rankings.</p>
-            </div>
+            </Link>
           </div>
         </div>
       )}
