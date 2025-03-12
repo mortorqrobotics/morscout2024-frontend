@@ -35,7 +35,7 @@
 }
 
 .back-icon {
-  color: #FF5F00 ;
+  color: #FF5F00;
   font-size: 24px;
   transition: all 0.3s ease;
 }
@@ -57,6 +57,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -83,27 +84,27 @@
 }
 
 @media screen and (max-width: 360px) {
-    .header-text{
-        font-size: 40px;
-    }
+  .header-text {
+    font-size: 40px;
   }
+}
 
 nav h2 {
-    font-weight: bold;
-    font-size: 40pt;
-    width: 100%;
-    text-align: center;
+  font-weight: bold;
+  font-size: 40pt;
+  width: 100%;
+  text-align: center;
 }
+
 nav div {
-    flex-grow: 1;
-    text-align: center;
-}
-.backIcon{
-    margin-top: 9px;
-    padding: 0 !important;
-    background-color: #0c0c0c;
-    width: 2em !important;
-    height: 2em !important;
+  flex-grow: 1;
+  text-align: center;
 }
 
-
+.backIcon {
+  margin-top: 9px;
+  padding: 0 !important;
+  background-color: #0c0c0c;
+  width: 2em !important;
+  height: 2em !important;
+}

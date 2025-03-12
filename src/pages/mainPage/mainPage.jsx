@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import "./mainPage.css";
 import { Link } from 'react-router-dom';
 
-
-
 const MainPage = ({ username }) => {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({

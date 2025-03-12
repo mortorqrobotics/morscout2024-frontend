@@ -42,10 +42,10 @@ const Pitscoutpage = () => {
           </>
         }
       />
-      
+
       <div className="team-select-content">
         <SearchBar onSearch={handleSearch} searchText="Search by Team Number" />
-        
+
         {loading ? (
           <div className="loading-state">
             <div className="loading-spinner"></div>
@@ -67,12 +67,12 @@ const Pitscoutpage = () => {
                 onClick={() => navigate(`/pit-team-form/${team.teamNumber}`)}
               >
                 <span className="team-number">#{team.teamNumber}</span>
-              
+
               </button>
             ))}
           </div>
         )}
-        
+
         {!loading && !error && filteredTeams.length === 0 && (
           <div className="no-results">
             <p>No teams found</p>

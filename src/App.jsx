@@ -29,8 +29,8 @@ function App() {
 
   return (
     <>
-      <Toaster 
-        position="top-center" 
+      <Toaster
+        position="top-center"
         reverseOrder={false}
         toastOptions={{
           style: {
@@ -39,49 +39,43 @@ function App() {
             border: '1px solid var(--surface-light)',
             borderRadius: 'var(--radius-md)',
           },
-        }} 
+        }}
       />
-      
+
       <Routes>
         <Route path="/login" element={<LoginPage changeUsername={changeUsername} />} />
-        
+
         <Route path="/" element={
           <Layout>
             <MainPage username={username} />
           </Layout>
         } />
-        
+
 
         <Route path="/rankings" element={
           <Layout>
             <Rankings />
           </Layout>
         } />
-        
-        {/* <Route path="/userpage" element={
-          <Layout>
-            <UserPage />
-          </Layout>
-        } /> */}
-        
+
         <Route path="/pit-team-choice" element={
           <Layout>
             <Pitscoutpage />
           </Layout>
         } />
-        
+
         <Route path="/pit-team-form/:teamNumber" element={
           <Layout>
             <PitScoutForm username={username} />
           </Layout>
         } />
-        
+
         <Route path="/matchscout-team-choice" element={
           <Layout>
             <MatchscoutPage username={username} />
           </Layout>
         } />
-        
+
         <Route path="/matchscout-team-form/:teamNumber/:matchNumber" element={
           <Layout>
             <MatchScoutForm username={username} />

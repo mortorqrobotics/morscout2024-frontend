@@ -110,8 +110,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  
+
 }
-.checkbox-text{
-  color:white;
+
+.checkbox-text {
+  color: white;
 }

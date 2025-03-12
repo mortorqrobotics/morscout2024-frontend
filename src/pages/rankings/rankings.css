@@ -1,15 +1,16 @@
-.ranking-list{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 20px;
-    align-items: flex-start;
+.ranking-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  align-items: flex-start;
 }
-.list-item{
-    font-size: 14px;
-    padding: 5px;
-    font-weight: 600;
+
+.list-item {
+  font-size: 14px;
+  padding: 5px;
+  font-weight: 600;
 }
 
 .rankings-page {
@@ -43,8 +44,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .rankings-table-container {
@@ -156,7 +162,8 @@
   }
 
   .rankings-table {
-    min-width: 800px; /* Ensure table doesn't shrink too much */
+    min-width: 800px;
+    /* Ensure table doesn't shrink too much */
   }
 }
 
@@ -216,6 +223,7 @@
 
 /* Dark mode support for new containers */
 @media (prefers-color-scheme: dark) {
+
   .error-container,
   .no-results-container {
     background: #2c2c2e;

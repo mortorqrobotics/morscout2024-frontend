@@ -119,6 +119,7 @@
     opacity: 0;
     transform: translate(-50%, -10px);
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, 0);
@@ -167,7 +168,7 @@
     width: 100%;
     margin: 16px auto;
   }
-  
+
   .menu li {
     padding: 14px 16px;
   }

@@ -18,7 +18,7 @@ const LoginPage = ({ changeUsername }) => {
     <div className="login">
       <form className="login-form">
         <label className="login-label">Login</label>
-        <Autocomplete 
+        <Autocomplete
           options={teamMembers}
           onSelect={handleSelect}
           placeholder="Type your name..."

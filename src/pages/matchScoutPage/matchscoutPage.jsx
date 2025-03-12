@@ -1,4 +1,4 @@
-import{ useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./matchScoutPage.css";
 import Header from "../../components/header/header";
 import MatchButton from "../../components/matchButton/matchButton";
@@ -42,10 +42,10 @@ const MatchscoutPage = ({ username }) => {
           </>
         }
       />
-      
+
       <div className="match-scout-content">
         <SearchBar searchText="Search match number..." onSearch={handleSearch} />
-        
+
         {loading ? (
           <div className="loading-state">
             <div className="loading-spinner"></div>
@@ -75,7 +75,7 @@ const MatchscoutPage = ({ username }) => {
             ))}
           </div>
         )}
-        
+
         {!loading && !error && filteredMatches.length === 0 && (
           <div className="no-results">
             <p>No matches found</p>

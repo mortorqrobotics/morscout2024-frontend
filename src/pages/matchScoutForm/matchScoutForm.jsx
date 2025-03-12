@@ -27,7 +27,7 @@ const DEFAULT_STATE = {
   autoNetAlgaeScores: 0,
   autoNetAlgaeAttempts: 0,
   leftStartingZone: "No",
-  
+
   // Teleop
   teleopL1Scores: 0,
   teleopL2Scores: 0,
@@ -48,62 +48,13 @@ const DEFAULT_STATE = {
   climbSuccess: "No",
   climbAttemptTime: "None",
   climbComments: "",
-  
+
   // General
   robotSpeed: "None",
-    // defenseRating: "-",
+  // defenseRating: "-",
   generalComments: "",
 };
 
-// const orderFormData = (data) => {
-//   // Create ordered sections based on DEFAULT_STATE structure
-//   const orderedData = {
-//     // Match Info
-//     matchNumber: data.matchNumber,
-    
-//     // Auto
-//     autoL1Scores: data.autoL1Scores,
-//     autoL2Scores: data.autoL2Scores,
-//     autoL3Scores: data.autoL3Scores,
-//     autoL4Scores: data.autoL4Scores,
-//     autoL1Attempts: data.autoL1Attempts,
-//     autoL2Attempts: data.autoL2Attempts,
-//     autoL3Attempts: data.autoL3Attempts,
-//     autoL4Attempts: data.autoL4Attempts,
-//     autoProcessorAlgaeScores: data.autoProcessorAlgaeScores,
-//     autoProcessorAlgaeAttempts: data.autoProcessorAlgaeAttempts,
-//     autoNetAlgaeScores: data.autoNetAlgaeScores,
-//     autoNetAlgaeAttempts: data.autoNetAlgaeAttempts,
-//     leftStartingZone: data.leftStartingZone,
-    
-//     // Teleop
-//     teleopL1Scores: data.teleopL1Scores,
-//     teleopL2Scores: data.teleopL2Scores,
-//     teleopL3Scores: data.teleopL3Scores,
-//     teleopL4Scores: data.teleopL4Scores,
-//     teleopL1Attempts: data.teleopL1Attempts,
-//     teleopL2Attempts: data.teleopL2Attempts,
-//     teleopL3Attempts: data.teleopL3Attempts,
-//     teleopL4Attempts: data.teleopL4Attempts,
-//     teleopProcessorAlgaeScores: data.teleopProcessorAlgaeScores,
-//     teleopProcessorAlgaeAttempts: data.teleopProcessorAlgaeAttempts,
-//     teleopNetAlgaeScores: data.teleopNetAlgaeScores,
-//     teleopNetAlgaeAttempts: data.teleopNetAlgaeAttempts,
-
-//     // Climb
-//     climbLevel: data.climbLevel,
-//     climbSuccess: data.climbSuccess,
-//     climbAttemptTime: data.climbAttemptTime,
-//     climbComments: data.climbComments,
-    
-//     // General
-//     robotSpeed: data.robotSpeed,
-//     // defenseRating: data.defenseRating,
-//     generalComments: data.generalComments,
-//   };
-
-//   return orderedData;
-// };
 
 const MatchScoutForm = ({ username }) => {
   const { teamNumber, matchNumber } = useParams();
@@ -115,7 +66,7 @@ const MatchScoutForm = ({ username }) => {
     e.preventDefault();
     const confirmed = window.confirm("Are you sure you want to submit? You won't be able to come back to this page.");
     if (!confirmed) return;
-    
+
     setFormSubmitted(true);
 
     const requiredFields = { ...formState };
@@ -124,7 +75,7 @@ const MatchScoutForm = ({ username }) => {
 
     // Track incomplete fields
     const incompleteFields = [];
-    
+
     Object.entries(requiredFields).forEach(([key, value]) => {
       if (typeof value === 'string' && (value === "" || value === "-")) {
         incompleteFields.push(key);
@@ -144,7 +95,7 @@ const MatchScoutForm = ({ username }) => {
         username,
         matchNumber,
       });
-      
+
       if (response.ok) {
         // await toggleMatchButtonStatus(teamNumber, matchNumber, username);
         toast.success("Match Scout form submitted successfully");
@@ -164,7 +115,7 @@ const MatchScoutForm = ({ username }) => {
   const handleNotesScored = (name, value) => {
     const level = name.match(/L\d/)[0];
     const phase = name.includes('auto') ? 'auto' : 'teleop';
-    
+
     setFormState(prevState => ({
       ...prevState,
       [name]: value,
@@ -193,7 +144,7 @@ const MatchScoutForm = ({ username }) => {
         {/* Auto Scoring Section */}
         <div className="scout-section">
           <h2>Auto Period - Scoring</h2>
-          
+
           {/* Auto Coral Scoring */}
           <div className="scoring-subsection">
             <h3>Coral Scoring</h3>
@@ -205,7 +156,7 @@ const MatchScoutForm = ({ username }) => {
                     scoredValue={formState[`auto${level}Scores`]}
                     attemptedValue={formState[`auto${level}Attempts`]}
                     onScoredChange={(value) => handleNotesScored(`auto${level}Scores`, value)}
-                    onAttemptedChange={(value) => 
+                    onAttemptedChange={(value) =>
                       setFormState(prevState => ({
                         ...prevState,
                         [`auto${level}Attempts`]: Math.max(value, prevState[`auto${level}Scores`])
@@ -225,14 +176,14 @@ const MatchScoutForm = ({ username }) => {
               <ScoringCounter
                 scoredValue={formState.autoProcessorAlgaeScores}
                 attemptedValue={formState.autoProcessorAlgaeAttempts}
-                onScoredChange={(value) => 
+                onScoredChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     autoProcessorAlgaeScores: value,
                     autoProcessorAlgaeAttempts: Math.max(value, prevState.autoProcessorAlgaeAttempts)
                   }))
                 }
-                onAttemptedChange={(value) => 
+                onAttemptedChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     autoProcessorAlgaeAttempts: Math.max(value, prevState.autoProcessorAlgaeScores)
@@ -245,14 +196,14 @@ const MatchScoutForm = ({ username }) => {
               <ScoringCounter
                 scoredValue={formState.autoNetAlgaeScores}
                 attemptedValue={formState.autoNetAlgaeAttempts}
-                onScoredChange={(value) => 
+                onScoredChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     autoNetAlgaeScores: value,
                     autoNetAlgaeAttempts: Math.max(value, prevState.autoNetAlgaeAttempts)
                   }))
                 }
-                onAttemptedChange={(value) => 
+                onAttemptedChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     autoNetAlgaeAttempts: Math.max(value, prevState.autoNetAlgaeScores)
@@ -266,7 +217,7 @@ const MatchScoutForm = ({ username }) => {
             <Checkbox
               label="Left Starting Zone?"
               checked={formState.leftStartingZone === "Yes"}
-              onChange={(checked) => 
+              onChange={(checked) =>
                 setFormState(prevState => ({
                   ...prevState,
                   leftStartingZone: checked ? "Yes" : "No"
@@ -279,7 +230,7 @@ const MatchScoutForm = ({ username }) => {
         {/* Teleop Scoring Section */}
         <div className="scout-section">
           <h2>Teleop Period - Scoring</h2>
-          
+
           {/* Teleop Coral Scoring */}
           <div className="scoring-subsection">
             <h3>Coral Scoring</h3>
@@ -291,7 +242,7 @@ const MatchScoutForm = ({ username }) => {
                     scoredValue={formState[`teleop${level}Scores`]}
                     attemptedValue={formState[`teleop${level}Attempts`]}
                     onScoredChange={(value) => handleNotesScored(`teleop${level}Scores`, value)}
-                    onAttemptedChange={(value) => 
+                    onAttemptedChange={(value) =>
                       setFormState(prevState => ({
                         ...prevState,
                         [`teleop${level}Attempts`]: Math.max(value, prevState[`teleop${level}Scores`])
@@ -311,14 +262,14 @@ const MatchScoutForm = ({ username }) => {
               <ScoringCounter
                 scoredValue={formState.teleopProcessorAlgaeScores}
                 attemptedValue={formState.teleopProcessorAlgaeAttempts}
-                onScoredChange={(value) => 
+                onScoredChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     teleopProcessorAlgaeScores: value,
                     teleopProcessorAlgaeAttempts: Math.max(value, prevState.teleopProcessorAlgaeAttempts)
                   }))
                 }
-                onAttemptedChange={(value) => 
+                onAttemptedChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     teleopProcessorAlgaeAttempts: Math.max(value, prevState.teleopProcessorAlgaeScores)
@@ -331,14 +282,14 @@ const MatchScoutForm = ({ username }) => {
               <ScoringCounter
                 scoredValue={formState.teleopNetAlgaeScores}
                 attemptedValue={formState.teleopNetAlgaeAttempts}
-                onScoredChange={(value) => 
+                onScoredChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     teleopNetAlgaeScores: value,
                     teleopNetAlgaeAttempts: Math.max(value, prevState.teleopNetAlgaeAttempts)
                   }))
                 }
-                onAttemptedChange={(value) => 
+                onAttemptedChange={(value) =>
                   setFormState(prevState => ({
                     ...prevState,
                     teleopNetAlgaeAttempts: Math.max(value, prevState.teleopNetAlgaeScores)
@@ -381,7 +332,7 @@ const MatchScoutForm = ({ username }) => {
                   <Checkbox
                     label="Successful Climb?"
                     checked={formState.climbSuccess === "Yes"}
-                    onChange={(checked) => 
+                    onChange={(checked) =>
                       setFormState(prevState => ({
                         ...prevState,
                         climbSuccess: checked ? "Yes" : "No"

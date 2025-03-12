@@ -11,13 +11,12 @@ import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
 
 const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
-const SCORINGPOSITIONS = ["-", "L1", "L2", "L3", "L4", "Processor"]; // Blank added for default
 
 const DEFAULT_STATE = {
   robotWeight: "",           // Robot Specifications
   frameSize: "",            // Robot Specifications
   drivetrain: "",           // Robot Specifications
-  
+
   auto: "",                 // Auto Capabilities
   scoringPositions: {       // Auto Scoring Positions (Checkboxes)
     processor: false,
@@ -36,13 +35,13 @@ const DEFAULT_STATE = {
     l4Teleop: false,
   },
   autoNotesScored: "",      // Auto Capabilities
-  
+
   estimatedCycleTime: "",   // Teleop Capabilities
   pickupFromFloor: "",      // Teleop Capabilities
-  
+
   climb: "",                // Climb Capabilities
   climbTime: "",           // Climb Capabilities
-  
+
   additionalComments: "",   // Additional Information
 };
 
@@ -92,8 +91,8 @@ const PitScoutForm = ({ username }) => {
     // Exclude additionalComments field if it's empty
     const isFormIncomplete = Object.entries(formState)
       .filter(([key, value]) => key !== "additionalComments" || value !== "")
-      .some(([key, value]) => 
-        key === "scoringPositions" 
+      .some(([key, value]) =>
+        key === "scoringPositions"
           ? !Object.values(value).some(v => v) // Check if at least one position is selected
           : value === ""
       );
@@ -169,7 +168,7 @@ const PitScoutForm = ({ username }) => {
           defaultOption={formState.auto}
         />
 
-      
+
 
         <TextBox
           label="Possible auto sequences (how many can they score - list all please!)"

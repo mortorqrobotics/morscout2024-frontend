@@ -70,9 +70,17 @@
 
 /* Add subtle haptic feedback animation */
 @keyframes tap {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.95); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .nav-link:active {
@@ -84,11 +92,11 @@
   .navbar {
     height: calc(56px + env(safe-area-inset-bottom, 0px));
   }
-  
+
   .nav-content {
     height: 56px;
   }
-  
+
   .page-content {
     padding-bottom: calc(56px + env(safe-area-inset-bottom, 20px));
   }
@@ -222,4 +230,4 @@
 .page-transition-exit-active {
   opacity: 0;
   transition: opacity 200ms;
-} 
+}

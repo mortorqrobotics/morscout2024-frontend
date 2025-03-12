@@ -217,7 +217,7 @@
 }
 
 /* Checkbox checked state */
-.checkbox-wrapper input:checked ~ .checkbox-custom {
+.checkbox-wrapper input:checked~.checkbox-custom {
   background: linear-gradient(135deg, #FF5F00 0%, #ff7f33 100%);
   border-color: transparent;
 }
@@ -235,7 +235,7 @@
   top: 10px;
 }
 
-.checkbox-wrapper input:checked ~ .checkbox-custom:after {
+.checkbox-wrapper input:checked~.checkbox-custom:after {
   display: block;
 }
 
@@ -253,7 +253,7 @@
   color: #FF5F00;
 }
 
-.checkbox-wrapper input:checked ~ .checkbox-label {
+.checkbox-wrapper input:checked~.checkbox-label {
   color: #FF5F00;
 }
 
@@ -262,15 +262,17 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
 }
 
-.checkbox-wrapper input:checked ~ .checkbox-custom {
+.checkbox-wrapper input:checked~.checkbox-custom {
   animation: checkboxPop 0.3s ease-out;
 }
 
@@ -368,6 +370,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -379,11 +382,11 @@
   .scout-section {
     padding: var(--spacing-md);
   }
-  
+
   .counter-group {
     max-width: 100%;
   }
-  
+
   .counter-button {
     width: 40px;
     height: 40px;
@@ -465,7 +468,11 @@ form {
 }
 
 /* Keep other styles the same but ensure text alignment is centered */
-h2, h3, p, label, span {
+h2,
+h3,
+p,
+label,
+span {
   text-align: center;
   width: 100%;
-} 
+}

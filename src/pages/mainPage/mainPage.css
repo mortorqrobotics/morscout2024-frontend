@@ -12,13 +12,14 @@
   margin-bottom: 100px;
   margin-top: 20px;
 }
+
 .main-page {
   height: 95vh;
   margin-top: 5vh;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
-  padding: 12px; 
+  padding: 12px;
   background: #1a1a1a;
   align-content: center;
   align-items: flex-start;
@@ -203,9 +204,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -228,6 +231,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -250,17 +254,20 @@
 
 /* Add skeleton loading state */
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--surface) 25%,
-    var(--surface-light) 50%,
-    var(--surface) 75%
-  );
+  background: linear-gradient(90deg,
+      var(--surface) 25%,
+      var(--surface-light) 50%,
+      var(--surface) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -307,12 +314,10 @@
   left: -100%;
   width: 200%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--surface-light) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--surface-light) 50%,
+      transparent 100%);
   animation: shimmer 1.5s infinite;
 }
 
@@ -414,12 +419,10 @@
   left: -100%;
   width: 200%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--surface-light) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--surface-light) 50%,
+      transparent 100%);
   animation: shimmer 1.5s infinite;
 }
 
@@ -428,6 +431,7 @@
   gap: 6px;
   flex-wrap: wrap;
 }
+
 .current-match .team {
   font-size: 12px;
   padding: 4px 8px;
@@ -437,9 +441,11 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
+
 .current-match .team.red {
   background: linear-gradient(135deg, rgba(255, 59, 48, 0.8), rgba(255, 59, 48, 0.6));
 }
+
 .current-match .team.blue {
   background: linear-gradient(135deg, rgba(0, 122, 255, 0.8), rgba(0, 122, 255, 0.6));
 }
@@ -452,6 +458,7 @@
 
 /* Optimize animations for mobile */
 @media (prefers-reduced-motion: reduce) {
+
   .main-page,
   .stat-card,
   .action-card {
@@ -462,6 +469,7 @@
 
 /* Add mobile-specific touch feedback */
 @media (hover: none) {
+
   .stat-card:active,
   .action-card:active {
     background-color: var(--surface-light);
@@ -470,7 +478,9 @@
 }
 
 /* Modern glass-morphism effect for cards */
-.stat-card, .action-card, .current-match {
+.stat-card,
+.action-card,
+.current-match {
   background: rgba(26, 26, 26, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -486,7 +496,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
+  background-image:
     radial-gradient(circle at 25% 25%, rgba(255, 95, 0, 0.05) 1px, transparent 1px),
     radial-gradient(circle at 75% 75%, rgba(255, 95, 0, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -498,6 +508,7 @@
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-40px);
   }
@@ -543,9 +554,17 @@
 }
 
 @keyframes loadingDots {
-  0% { content: '.'; }
-  33% { content: '..'; }
-  66% { content: '...'; }
+  0% {
+    content: '.';
+  }
+
+  33% {
+    content: '..';
+  }
+
+  66% {
+    content: '...';
+  }
 }
 
 /* Modern scrollbar */
@@ -568,7 +587,7 @@
 }
 
 /* Ensure content doesn't overflow */
-.main-page > * {
+.main-page>* {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;

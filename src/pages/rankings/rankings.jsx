@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/header/header";
 import SearchBar from "../../components/searchbar/searchbar";
 import { getRankings, getTeamName } from "../../api/tba";
@@ -19,7 +19,7 @@ const Rankings = () => {
     const fetchData = async () => {
       try {
         const response = await getRankings();
-        
+
         // Check if response and rankings exist
         if (!response || !response.rankings) {
           throw new Error('No rankings data available');
@@ -36,7 +36,7 @@ const Rankings = () => {
             sortOrders: ranking.sort_orders || []
           }))
         );
-        
+
         setRankings(rankingsWithTeamNames);
         setFilteredRankings(rankingsWithTeamNames);
         setSortOrderInfo(response.sort_order_info || []);
@@ -70,7 +70,7 @@ const Rankings = () => {
 
     const sorted = [...filteredRankings].sort((a, b) => {
       let aValue, bValue;
-      
+
       // Handle nested properties and special cases
       if (key === 'record') {
         aValue = a.record.wins * 2 + a.record.ties;
@@ -106,11 +106,11 @@ const Rankings = () => {
     <div className="rankings-page">
       <Header toWhere="/" headerText="Rankings" />
       <div className="rankings-content">
-        <SearchBar 
-          onSearch={handleSearch} 
-          searchText="Search by team name, number, or rank" 
+        <SearchBar
+          onSearch={handleSearch}
+          searchText="Search by team name, number, or rank"
         />
-        
+
         {loading ? (
           <div className="loading-container">
             <div className="loading-spinner"></div>
@@ -167,8 +167,8 @@ const Rankings = () => {
                     <td>{ranking.qualAverage.toFixed(2)}</td>
                     {ranking.sortOrders.map((value, index) => (
                       <td key={index}>
-                        {sortOrderInfo[index]?.precision 
-                          ? value.toFixed(sortOrderInfo[index].precision) 
+                        {sortOrderInfo[index]?.precision
+                          ? value.toFixed(sortOrderInfo[index].precision)
                           : value}
                       </td>
                     ))}
