@@ -3,31 +3,32 @@ import TextInput from "../../components/textInput/textInput";
 import SubmitButton from "../../components/submitBtn/submitBtn";
 import Header from "../../components/header/header";
 import Dropdown from "../../components/dropdown/dropdown";
+import TextBox from "../../components/textBox/textBox";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
-import TextBox from "../../components/textBox/textBox";
 
 const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
-const SCORINGPOSITIONS = ["-", "Amp", "Speaker", "Both"]; // Blank added for default
+const SCORINGPOSITIONS = ["-", "L1", "L2", "L3", "L4", "Processor"]; // Blank added for default
 
 const DEFAULT_STATE = {
-  robotWeight: "",
-  frameSize: "",
-  drivetrain: "",
-  auto: "",
-  scoringPositionAuto: "",
-  autoNotesScored: "",
-  scoringPosition: "",
-  estimatedCycleTime: "",
-  pickupFromFloor: "",
-  climb: "",
-  trap: "",
-  buddyClimb: "", // New field added for buddy climb
-  climbTime: "", // New field added for climb time
-  shootFrom: "", // New field added for where the robot can shoot from
-  additionalComments: "", // New field added for additional comments
+  robotWeight: "",           // Robot Specifications
+  frameSize: "",            // Robot Specifications
+  drivetrain: "",           // Robot Specifications
+  
+  auto: "",                 // Auto Capabilities
+  scoringPositionAuto: "",  // Auto Capabilities
+  autoNotesScored: "",      // Auto Capabilities
+  
+  scoringPosition: "",      // Teleop Capabilities
+  estimatedCycleTime: "",   // Teleop Capabilities
+  pickupFromFloor: "",      // Teleop Capabilities
+  
+  climb: "",                // Climb Capabilities
+  climbTime: "",           // Climb Capabilities
+  
+  additionalComments: "",   // Additional Information
 };
 
 const PitScoutForm = ({ username }) => {
