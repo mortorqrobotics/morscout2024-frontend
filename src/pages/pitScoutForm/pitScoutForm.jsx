@@ -169,14 +169,7 @@ const PitScoutForm = ({ username }) => {
           defaultOption={formState.auto}
         />
 
-        <Dropdown
-          label="Scoring position in auto?"
-          options={SCORINGPOSITIONS}
-          onSelect={(value) =>
-            handleDropdownSelect(value, "scoringPositionAuto")
-          }
-          defaultOption={formState.scoringPositionAuto}
-        />
+      
 
         <TextBox
           label="Possible auto sequences (how many can they score - list all please!)"
