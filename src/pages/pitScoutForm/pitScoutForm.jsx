@@ -4,6 +4,7 @@ import SubmitButton from "../../components/submitBtn/submitBtn";
 import Header from "../../components/header/header";
 import Dropdown from "../../components/dropdown/dropdown";
 import TextBox from "../../components/textBox/textBox";
+import Checkbox from "../../components/checkbox/checkbox";
 import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
@@ -18,10 +19,24 @@ const DEFAULT_STATE = {
   drivetrain: "",           // Robot Specifications
   
   auto: "",                 // Auto Capabilities
-  scoringPositionAuto: "",  // Auto Capabilities
+  scoringPositions: {       // Auto Scoring Positions (Checkboxes)
+    processor: false,
+    net: false,
+    l1: false,
+    l2: false,
+    l3: false,
+    l4: false,
+  },
+  scoringPositionsTeleop: {  // Teleop Scoring Positions (Checkboxes)
+    processorTeleop: false,
+    netTeleop: false,
+    l1Teleop: false,
+    l2Teleop: false,
+    l3Teleop: false,
+    l4Teleop: false,
+  },
   autoNotesScored: "",      // Auto Capabilities
   
-  scoringPosition: "",      // Teleop Capabilities
   estimatedCycleTime: "",   // Teleop Capabilities
   pickupFromFloor: "",      // Teleop Capabilities
   
@@ -50,6 +65,26 @@ const PitScoutForm = ({ username }) => {
     }));
   };
 
+  const handleAutoCheckboxChange = (position) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      scoringPositions: {
+        ...prevState.scoringPositions,
+        [position]: !prevState.scoringPositions[position]
+      }
+    }));
+  };
+
+  const handleTeleopCheckboxChange = (position) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      scoringPositionsTeleop: {
+        ...prevState.scoringPositionsTeleop,
+        [position]: !prevState.scoringPositionsTeleop[position]
+      }
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitted(true);
@@ -57,7 +92,11 @@ const PitScoutForm = ({ username }) => {
     // Exclude additionalComments field if it's empty
     const isFormIncomplete = Object.entries(formState)
       .filter(([key, value]) => key !== "additionalComments" || value !== "")
-      .some(([key, value]) => value === "");
+      .some(([key, value]) => 
+        key === "scoringPositions" 
+          ? !Object.values(value).some(v => v) // Check if at least one position is selected
+          : value === ""
+      );
 
     if (isFormIncomplete) {
       toast.error("Form is not filled out completely");
@@ -146,12 +185,41 @@ const PitScoutForm = ({ username }) => {
           onChange={handleChange}
         />
 
-        <Dropdown
-          label="Scoring position in teleop?"
-          options={SCORINGPOSITIONS}
-          onSelect={(value) => handleDropdownSelect(value, "scoringPosition")}
-          defaultOption={formState.scoringPosition}
-        />
+        <div className="checkbox-group">
+          <h3 className="checkbox-text">Scoring Positions in Auto</h3>
+          <div className="checkbox-row">
+            <Checkbox
+              label="Processor"
+              checked={formState.scoringPositions.processor}
+              onChange={() => handleAutoCheckboxChange('processor')}
+            />
+            <Checkbox
+              label="Net"
+              checked={formState.scoringPositions.net}
+              onChange={() => handleAutoCheckboxChange('net')}
+            />
+            <Checkbox
+              label="L1"
+              checked={formState.scoringPositions.l1}
+              onChange={() => handleAutoCheckboxChange('l1')}
+            />
+            <Checkbox
+              label="L2"
+              checked={formState.scoringPositions.l2}
+              onChange={() => handleAutoCheckboxChange('l2')}
+            />
+            <Checkbox
+              label="L3"
+              checked={formState.scoringPositions.l3}
+              onChange={() => handleAutoCheckboxChange('l3')}
+            />
+            <Checkbox
+              label="L4"
+              checked={formState.scoringPositions.l4}
+              onChange={() => handleAutoCheckboxChange('l4')}
+            />
+          </div>
+        </div>
         <TextInput
           label="Estimated Cycle Time (human player station to shooting)? (s)"
           name="estimatedCycleTime"
@@ -179,6 +247,42 @@ const PitScoutForm = ({ username }) => {
           value={formState.climbTime}
           onChange={handleChange}
         />
+
+        <div className="checkbox-group">
+          <h3 className="checkbox-text">Scoring Positions in Teleop</h3>
+          <div className="checkbox-row">
+            <Checkbox
+              label="Processor"
+              checked={formState.scoringPositionsTeleop.processorTeleop}
+              onChange={() => handleTeleopCheckboxChange('processorTeleop')}
+            />
+            <Checkbox
+              label="Net"
+              checked={formState.scoringPositionsTeleop.netTeleop}
+              onChange={() => handleTeleopCheckboxChange('netTeleop')}
+            />
+            <Checkbox
+              label="L1"
+              checked={formState.scoringPositionsTeleop.l1Teleop}
+              onChange={() => handleTeleopCheckboxChange('l1Teleop')}
+            />
+            <Checkbox
+              label="L2"
+              checked={formState.scoringPositionsTeleop.l2Teleop}
+              onChange={() => handleTeleopCheckboxChange('l2Teleop')}
+            />
+            <Checkbox
+              label="L3"
+              checked={formState.scoringPositionsTeleop.l3Teleop}
+              onChange={() => handleTeleopCheckboxChange('l3Teleop')}
+            />
+            <Checkbox
+              label="L4"
+              checked={formState.scoringPositionsTeleop.l4Teleop}
+              onChange={() => handleTeleopCheckboxChange('l4Teleop')}
+            />
+          </div>
+        </div>
 
         <TextInput
           label="Additional Comments"
