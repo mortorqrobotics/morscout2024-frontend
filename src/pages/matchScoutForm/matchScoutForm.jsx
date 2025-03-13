@@ -8,9 +8,11 @@ import SubmitButton from "../../components/submitBtn/submitBtn";
 import "./matchScout.css";
 import ScoringCounter from '../../components/scoringCounter/scoringCounter';
 import Checkbox from "../../components/checkbox/checkbox";
+import Dropdown from "../../components/dropdown/dropdown";
 
 // const CHOICEYESNOBLANK = ["-", "Yes", "No"];
 const SCORING_LEVELS = ["-", "L1", "L2", "L3", "L4"];
+const CHOICEYESNO = ["Yes", "No"];
 
 const DEFAULT_STATE = {
   // Auto
@@ -53,6 +55,11 @@ const DEFAULT_STATE = {
   robotSpeed: "None",
   // defenseRating: "-",
   generalComments: "",
+
+  // Robot Reliability
+  brokeDown: "-",              // Yes/No dropdown
+  breakdownDetails: "",       // Text box for details
+  completelyBroken: false,    // Checkbox for "Did not move/broken"
 };
 
 
@@ -128,6 +135,66 @@ const MatchScoutForm = ({ username }) => {
       ...prevState,
       [field]: value ? option : "None"
     }));
+  };
+
+  const handleDropdownSelect = (value, field) => {
+    setFormState(prevState => ({
+      ...prevState,
+      [field]: value
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleScoreIncrement = (type) => {
+    setFormState((prev) => {
+      const newScores = prev[type + "Scores"] + 1;
+      // Always ensure attempts is at least equal to scores
+      const newAttempts = Math.max(newScores, prev[type + "Attempts"]);
+      
+      return {
+        ...prev,
+        [type + "Scores"]: newScores,
+        [type + "Attempts"]: newAttempts
+      };
+    });
+  };
+
+  const handleScoreDecrement = (type) => {
+    setFormState((prev) => {
+      const newScores = Math.max(0, prev[type + "Scores"] - 1);
+      return {
+        ...prev,
+        [type + "Scores"]: newScores
+      };
+    });
+  };
+
+  const handleAttemptIncrement = (type) => {
+    setFormState((prev) => ({
+      ...prev,
+      [type + "Attempts"]: prev[type + "Attempts"] + 1
+    }));
+  };
+
+  const handleAttemptDecrement = (type) => {
+    setFormState((prev) => {
+      // Don't allow attempts to go below scores
+      const newAttempts = Math.max(
+        prev[type + "Scores"],
+        Math.max(0, prev[type + "Attempts"] - 1)
+      );
+      return {
+        ...prev,
+        [type + "Attempts"]: newAttempts
+      };
+    });
   };
 
   return (
@@ -408,6 +475,36 @@ const MatchScoutForm = ({ username }) => {
             name="generalComments"
             value={formState.generalComments}
             onChange={(e) => setFormState({ ...formState, generalComments: e.target.value })}
+          />
+        </div>
+
+        <div className="form-section">
+          <h3>Robot Reliability</h3>
+          
+          <Dropdown
+            label="Did the robot break down during this match?"
+            options={CHOICEYESNO}
+            onSelect={(value) => handleDropdownSelect(value, "brokeDown")}
+            defaultOption={formState.brokeDown}
+          />
+
+          {formState.brokeDown === "Yes" && (
+            <TextBox
+              label="What happened? (Breakdown details)"
+              name="breakdownDetails"
+              value={formState.breakdownDetails}
+              onChange={handleChange}
+              placeholder="Describe what broke..."
+            />
+          )}
+
+          <Checkbox
+            label="Did not move entire match / completely broken"
+            checked={formState.completelyBroken}
+            onChange={(e) => setFormState(prev => ({
+              ...prev,
+              completelyBroken: e.target.checked
+            }))}
           />
         </div>
 
