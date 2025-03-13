@@ -487,31 +487,36 @@ const MatchScoutForm = ({ username }) => {
           />
         </div>
 
-        <div className="form-section">
-          <h3>Robot Reliability</h3>
-          
-          <Dropdown
-            label="Did the robot break down during this match?"
-            options={CHOICEYESNO}
-            onSelect={(value) => handleDropdownSelect(value, "brokeDown")}
-            defaultOption={formState.brokeDown}
-          />
-
-          {formState.brokeDown === "Yes" && (
-            <TextBox
-              label="What happened? (Breakdown details)"
-              name="breakdownDetails"
-              value={formState.breakdownDetails}
-              onChange={handleChange}
-              placeholder="Describe what broke..."
+        <div className="scout-section">
+          <h2>Robot Reliability</h2>
+          <div className="form-section">
+            <Dropdown
+              label="Did the robot break down during this match?"
+              options={CHOICEYESNO}
+              onSelect={(value) => handleDropdownSelect(value, "brokeDown")}
+              defaultOption={formState.brokeDown}
             />
-          )}
 
-          <Checkbox
-            label="Did not move entire match / completely broken"
-            checked={formState.completelyBroken}
-            onChange={() => handleCheckboxChange('completelyBroken')}
-          />
+            {formState.brokeDown === "Yes" && (
+              <div className="comments-section">
+                <TextBox
+                  label="What happened? (Breakdown details)"
+                  name="breakdownDetails"
+                  value={formState.breakdownDetails}
+                  onChange={handleChange}
+                  placeholder="Describe what broke..."
+                />
+              </div>
+            )}
+
+            <div className="checkbox-group">
+              <Checkbox
+                label="Did not move entire match / completely broken"
+                checked={formState.completelyBroken}
+                onChange={() => handleCheckboxChange('completelyBroken')}
+              />
+            </div>
+          </div>
         </div>
 
         <SubmitButton label={formSubmitted ? "Submitting..." : "Submit"} />
