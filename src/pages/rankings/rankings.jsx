@@ -3,8 +3,10 @@ import Header from "../../components/header/header";
 import SearchBar from "../../components/searchbar/searchbar";
 import { getRankings, getTeamName } from "../../api/tba";
 import "./rankings.css";
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 const Rankings = () => {
+  useScrollToTop();
   const [rankings, setRankings] = useState([]);
   const [filteredRankings, setFilteredRankings] = useState([]);
   const [loading, setLoading] = useState(true);

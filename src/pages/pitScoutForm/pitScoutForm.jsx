@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { submitPitscout } from "../../api/server";
 import "./pitScoutForm.css";
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 const CHOICEYESNO = ["-", "Yes", "No"]; // Blank added for default
 
@@ -48,6 +49,7 @@ const DEFAULT_STATE = {
 const PitScoutForm = ({ username }) => {
   const { teamNumber } = useParams();
   const navigate = useNavigate();
+  useScrollToTop();
 
   const [formState, setFormState] = useState({ ...DEFAULT_STATE, teamNumber });
   const [formSubmitted, setFormSubmitted] = useState(false);

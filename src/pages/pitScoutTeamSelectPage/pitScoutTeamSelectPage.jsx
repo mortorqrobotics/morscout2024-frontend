@@ -4,6 +4,7 @@ import { getEventTeamsNumbers } from "../../api/tba";
 import Header from "../../components/header/header";
 import SearchBar from "../../components/searchbar/searchbar";
 import "./pitScoutTeamSelectPage.css";
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 const Pitscoutpage = () => {
   const [teams, setTeams] = useState([]);
@@ -11,6 +12,8 @@ const Pitscoutpage = () => {
   const [error, setError] = useState(null);
   const [filteredTeams, setFilteredTeams] = useState([]);
   const navigate = useNavigate();
+
+  useScrollToTop();
 
   useEffect(() => {
     setLoading(true);

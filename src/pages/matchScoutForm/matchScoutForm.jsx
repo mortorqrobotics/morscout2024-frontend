@@ -9,6 +9,7 @@ import "./matchScout.css";
 import ScoringCounter from '../../components/scoringCounter/scoringCounter';
 import Checkbox from "../../components/checkbox/checkbox";
 import Dropdown from "../../components/dropdown/dropdown";
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 // const CHOICEYESNOBLANK = ["-", "Yes", "No"];
 const SCORING_LEVELS = ["-", "L1", "L2", "L3", "L4"];
@@ -64,6 +65,7 @@ const DEFAULT_STATE = {
 
 
 const MatchScoutForm = ({ username }) => {
+  useScrollToTop();
   const { teamNumber, matchNumber } = useParams();
   const navigate = useNavigate();
   const [formState, setFormState] = useState({ ...DEFAULT_STATE });
@@ -195,6 +197,13 @@ const MatchScoutForm = ({ username }) => {
         [type + "Attempts"]: newAttempts
       };
     });
+  };
+
+  const handleCheckboxChange = (name) => {
+    setFormState((prev) => ({
+      ...prev,
+      [name]: !prev[name]
+    }));
   };
 
   return (
@@ -501,10 +510,7 @@ const MatchScoutForm = ({ username }) => {
           <Checkbox
             label="Did not move entire match / completely broken"
             checked={formState.completelyBroken}
-            onChange={(e) => setFormState(prev => ({
-              ...prev,
-              completelyBroken: e.target.checked
-            }))}
+            onChange={() => handleCheckboxChange('completelyBroken')}
           />
         </div>
 
