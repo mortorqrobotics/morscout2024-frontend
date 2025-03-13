@@ -81,6 +81,7 @@ const MatchScoutForm = ({ username }) => {
     const requiredFields = { ...formState };
     delete requiredFields.climbComments;
     delete requiredFields.generalComments;
+    delete requiredFields.breakdownDetails;
 
     // Track incomplete fields
     const incompleteFields = [];
