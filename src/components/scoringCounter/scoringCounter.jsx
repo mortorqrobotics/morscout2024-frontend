@@ -20,14 +20,20 @@ const ScoringCounter = ({
             -
           </button>
           <span className="scoring-value">{scoredValue}</span>
-          <button type="button" onClick={() => onScoredChange(scoredValue + 1)}>
+          <button 
+            type="button" 
+            onClick={() => {
+              onScoredChange(scoredValue + 1);
+              onAttemptedChange(attemptedValue + 1);  // Always increment attempts when scoring
+            }}
+          >
             +
           </button>
         </div>
       </div>
       <div>
         <div className="scoring-counter">
-          <span>Attemped</span>
+          <span>Attempted</span>
         </div>
 
         <div className="scoring-controls">

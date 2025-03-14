@@ -156,25 +156,19 @@ const MatchScoutForm = ({ username }) => {
   };
 
   const handleScoreIncrement = (type) => {
-    setFormState((prev) => {
-      const newScores = prev[type + "Scores"] + 1;
-      // Always ensure attempts is at least equal to scores
-      const newAttempts = Math.max(newScores, prev[type + "Attempts"]);
-      
-      return {
-        ...prev,
-        [type + "Scores"]: newScores,
-        [type + "Attempts"]: newAttempts
-      };
-    });
+    setFormState((prev) => ({
+      ...prev,
+      [type + "Scores"]: prev[type + "Scores"] + 1,
+      [type + "Attempts"]: prev[type + "Attempts"] + 1  // Always increment attempts with scores
+    }));
   };
 
   const handleScoreDecrement = (type) => {
     setFormState((prev) => {
-      const newScores = Math.max(0, prev[type + "Scores"] - 1);
+      if (prev[type + "Scores"] <= 0) return prev;
       return {
         ...prev,
-        [type + "Scores"]: newScores
+        [type + "Scores"]: prev[type + "Scores"] - 1
       };
     });
   };
@@ -188,14 +182,10 @@ const MatchScoutForm = ({ username }) => {
 
   const handleAttemptDecrement = (type) => {
     setFormState((prev) => {
-      // Don't allow attempts to go below scores
-      const newAttempts = Math.max(
-        prev[type + "Scores"],
-        Math.max(0, prev[type + "Attempts"] - 1)
-      );
+      if (prev[type + "Attempts"] <= prev[type + "Scores"]) return prev;
       return {
         ...prev,
-        [type + "Attempts"]: newAttempts
+        [type + "Attempts"]: prev[type + "Attempts"] - 1
       };
     });
   };
