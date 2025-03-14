@@ -4,8 +4,10 @@ import Header from "../../components/header/header";
 import MatchButton from "../../components/matchButton/matchButton";
 import { getEventMatches } from "../../api/tba";
 import SearchBar from "../../components/searchbar/searchbar";
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const MatchscoutPage = ({ username }) => {
+  useScrollToTop();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

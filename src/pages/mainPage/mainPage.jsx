@@ -38,29 +38,7 @@ const MainPage = ({ username }) => {
         </div>
       ) : (
         <div className="content-wrapper">
-          <div className="stats-grid">
-            <div
-              className="stat-card"
-              onClick={() => handleCardClick("/pit-team-choice")}
-            >
-              <span className="stat-value">{stats.pitScouts}</span>
-              <span className="stat-label">Pit Scouts</span>
-            </div>
-            <div
-              className="stat-card"
-              onClick={() => handleCardClick("/matchscout-team-choice")}
-            >
-              <span className="stat-value">{stats.matchScouts}</span>
-              <span className="stat-label">Match Scouts</span>
-            </div>
-            <div
-              className="stat-card"
-              onClick={() => handleCardClick("/teams")}
-            >
-              <span className="stat-value">{stats.totalTeams}</span>
-              <span className="stat-label">Total Teams</span>
-            </div>
-          </div>
+          
 
           <div className="action-cards">
             <Link className="action-card" to={"/pit-team-choice"}>
