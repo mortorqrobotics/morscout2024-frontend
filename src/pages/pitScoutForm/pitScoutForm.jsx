@@ -90,17 +90,18 @@ const PitScoutForm = ({ username }) => {
     e.preventDefault();
     setFormSubmitted(true);
 
-    // Exclude additionalComments field if it's empty
-    const isFormIncomplete = Object.entries(formState)
-      .filter(([key, value]) => key !== "additionalComments" || value !== "")
-      .some(([key, value]) =>
-        key === "scoringPositions"
-          ? !Object.values(value).some(v => v) // Check if at least one position is selected
-          : value === ""
-      );
+    // Exclude optional fields from validation
+    const requiredFields = Object.entries(formState)
+      .filter(([key, value]) => 
+        key !== "additionalComments" && 
+        key !== "scoringPositions" && 
+        key !== "scoringPositionsTeleop"
+      )
+      .some(([key, value]) => value === "");
 
-    if (isFormIncomplete) {
+    if (requiredFields) {
       toast.error("Form is not filled out completely");
+      setFormSubmitted(false);
       return;
     }
 
