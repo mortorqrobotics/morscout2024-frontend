@@ -35,5 +35,6 @@ export const teamMembers = [
   "AJ Smiler",
   "Siksaka Suriyasat",
   "Elizabeth Yerushalmi",
-  "Matan Zadeh"
+  "Matan Zadeh",
+  "Ari Efron"
 ]; 
